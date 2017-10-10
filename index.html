@@ -1,46 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <!-- Basic Page Needs
+    <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Your page title here :)</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <title>Members stats</title>
+    <meta name="description" content="Stats for each members of Miracle">
+    <meta name="author" content="sagiri">
 
-  <!-- Mobile Specific Metas
+    <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
+    <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet">
 
-  <!-- CSS
+    <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
 
-  <!-- Favicon
+    <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
+
 <body>
 
-  <!-- Primary Page Layout
+    <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Basic Page</h4>
-        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
-      </div>
-    </div>
-  </div>
+    <div class="container">
+        <div class="row">
+            <div class="six columns" style="margin-top:5%">
+                <h4>Stats update</h4>
+            </div>
+        </div>
+        <form>
+            <!-- Basic info -->
+            <div class="row">
+                <div class="one-third column">
+                    <label for="disname">Discord name</label>
+                    <input class="u-full-width" type="text" placeholder="Discord name" id="disname">
+                </div>
+                <div class="one-third column">
+                    <label for="charname">Character name</label>
+                    <input class="u-full-width" type="text" placeholder="Name" id="charname">
+                </div>
+                <div class="one-third column">
+                    <label for="charclass">Class</label>
+                    <select class="u-full-width" id="charclass">
+                          <option value="Haru">Haru</option>
+                          <option value="Erwin">Erwin</option>
+                          <option value="Lily">Lily</option>
+                          <option value="Stella">Stella</option>
+                          <option value="Jin">Jin</option>
+                          <option value="Iris">Iris</option>
+                        </select>
+                </div>
+            </div>
 
-<!-- End Document
+            <!-- Gear info -->
+            <div class="row">
+                <div class="six columns">
+                    <label for="weapon">Weapon</label>
+                    <select class="u-full-width" id="weapon">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="six columns">
+                    <label for="head">Head</label>
+                    <select class="u-full-width" id="head">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <label for="shoulder">Shoulder</label>
+                    <select class="u-full-width" id="shoulder">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="six columns">
+                    <label for="body">Body</label>
+                    <select class="u-full-width" id="body">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <label for="feet">Feet</label>
+                    <select class="u-full-width" id="feet">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="six columns">
+                    <label for="ear">Earrings</label>
+                    <select class="u-full-width" id="ear">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <label for="pen">Pendant</label>
+                    <select class="u-full-width" id="pen">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="six columns">
+                    <label for="ring1">Ring 1</label>
+                    <select class="u-full-width" id="ring1">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <label for="ring2">Ring 2</label>
+                    <select class="u-full-width" id="ring2">
+                      <option value="Devourer">Devourer</option>
+                      <option value="Aurite">Aurite</option>
+                      <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+            <input class="button-primary" type="submit" value="Submit">
+        </form>
+        <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
+
+        <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
+    </div>
+
+    <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
+
 </html>
