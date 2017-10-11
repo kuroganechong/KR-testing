@@ -1,3 +1,17 @@
+<?php
+    require('common.php');
+    // retrieve char list
+    $query = "SELECT discordname, charname, charclass, setno, time FROM characters ORDER BY discordname";
+    try
+    {
+        $stmt = $db->query($query);
+    }
+    catch(PDOException $ex)
+    {
+        die("Failed to run query");
+    }
+    $charrows = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,8 +81,8 @@
 <body>
     <div class="nav-bar">
         <ul class="ul">
-            <li class="li"><a href="index.html">Update</a></li>
-            <li class="li active"><a href="list.php">List</a></li>
+            <li class="li active"><a href="index.php">List</a></li>
+            <li class="li"><a href="update.php">Update</a></li>
         </ul>
     </div>
     <!-- Primary Page Layout
@@ -76,58 +90,36 @@
     <div class="container" id="app">
         <div class="row">
             <div class="six columns" style="margin-top:5%">
-                <h4>Stats list</h4>
+                <h4>Characters list</h4>
             </div>
         </div>
 
         <table class="u-full-width">
             <thead>
                 <tr>
-                    <th>Char</th>
+                    <th>Discord name</th>
+                    <th>IGN</th>
                     <th>Class</th>
-                    <th>HP</th>
-                    <th>Min Atk</th>
-                    <th>Max Atk</th>
-                    <th>C.R</th>
-                    <th>C.Dmg</th>
-                    <th>Atk Spd</th>
-                    <th>Acc</th>
-                    <th>Pen</th>
-                    <th>Def</th>
-                    <th>Eva</th>
-                    <th>Dmg Reduc</th>
-                    <th>C.Resist</th>
-                    <th>SA</th>
-                    <th>DmgMob</th>
-                    <th>DmgBoss</th>
-                    <th>Ele</th>
-                    <th>E.Dmg</th>
+                    <th>setno</th>
+                    <th>timestamp</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>{{charname}}</td>
-                    <td>{{charclass}}</td>
-                    <td>{{harustat.hp}}</td>
-                    <td>{{harustat.minatk}}</td>
-                    <td>{{harustat.maxatk}}</td>
-                    <td>{{critrate}}</td>
-                    <td>{{harustat.cdmg}}</td>
-                    <td>{{atkspd}}</td>
-                    <td>{{harustat.acc}}</td>
-                    <td>{{pen}}</td>
-                    <td>{{harustat.def}}</td>
-                    <td>{{harustat.eva}}</td>
-                    <td>{{dmgred}}</td>
-                    <td>{{critres}}</td>
-                    <td>{{sa}}</td>
-                    <td>{{dmgmob}}</td>
-                    <td>{{dmgboss}}</td>
-                    <td>{{elew}}</td>
-                    <td>{{eledmg}}</td>
-                </tr>
+                <?php
+                    foreach($charrows as $charrow){
+                        echo '<tr><td>'.$charrow['discordname'].'</td>';
+                        echo '<td>'.$charrow['charname'].'</td>';
+                        echo '<td>'.$charrow['charclass'].'</td>';
+                        echo '<td>'.$charrow['setno'].'</td>';
+                        echo '<td>'.$charrow['time'].'</td>';
+                        echo '<td><a class="button button-primary" href="update.php?setno='.$charrow['setno'].'">Update</a></td></tr>';
+                    }
+                ?>
             </tbody>
         </table>
+
+        <a class="button button-primary" href="update.php">New character info</a>
 
         <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
 
