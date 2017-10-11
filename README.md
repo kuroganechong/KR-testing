@@ -1,9 +1,7 @@
 # kuroganechong.github.io
 
 To do:
-Weapon substat list
-Gear substat list
-Accs substat list
+display list
 
 Damage formula calculator
 Crit dmg/Crit Rate formula
