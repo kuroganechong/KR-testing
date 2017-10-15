@@ -163,13 +163,13 @@
                         <td><input type="number" v-model="high"> zenny</td>
                     </tr>
                     <tr>
-                        <td>Cost to craft (before conversion)</td>
+                        <td>Cost to craft <span v-if="(pbeforeconv - cost) > 0">(before conversion)</span></td>
                         <td>{{pbeforeconv}} zenny <br>To buy: Low = {{lbeforeconv}}, Mid = {{mbeforeconv}}, High = {{hbeforeconv}}, Crafting fee = {{craft}}</td>
                     </tr>
-                    <tr>
+                    <tr v-if="(pbeforeconv - cost) > 0">
                         <td>Cost to craft (after conversion)</td>
                         <td>{{cost}} zenny (Saved: {{pbeforeconv - cost}})<br>To buy: Low = {{lowtb}}, Mid = {{midtb}}, High = {{hightb}}, Conversion fee = {{convert}}, Crafting fee = {{craft}}
-                            <div v-if="(pbeforeconv - cost) > 0"><br>Method: Convert {{(hbeforeconv - hightb) * 100 + (mbeforeconv - midtb) * 10}} low frags to mid frags, then convert {{(hbeforeconv - hightb)*10}} mid frags to high frags</div>
+                            <br>Method: Convert {{(hbeforeconv - hightb) * 100 + (mbeforeconv - midtb) * 10}} low frags to mid frags, then convert {{(hbeforeconv - hightb)*10}} mid frags to high frags
                         </td>
                     </tr>
                 </tbody>
