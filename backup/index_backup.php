@@ -81,10 +81,8 @@
 <body>
     <div class="nav-bar">
         <ul class="ul">
-            <li class="li active"><a href="index.php">Char List</a></li>
-            <li class="li"><a href="statlist.php">Stat List</a></li>
-            <li class="li"><a href="">Stat simulator(wip)</a></li>
-            <li class="li"><a href="data/index.html">Knowledge Base</a></li>
+            <li class="li active"><a href="index.php">List</a></li>
+            <li class="li"><a href="update.php">Update</a></li>
         </ul>
     </div>
     <!-- Primary Page Layout
@@ -114,7 +112,7 @@
                         echo '<td>'.$charrow['charname'].'</td>';
                         echo '<td>'.$charrow['charclass'].'</td>';
                         echo '<td>'.$charrow['time'].'</td>';
-                        echo '<td><button class="button" href="update.php?setno='.$charrow['setno'].'" disabled>Update</button></td>';
+                        echo '<td><a class="button button-primary" href="update.php?setno='.$charrow['setno'].'">Update</a></td>';
                         echo '<td><a class="button button-primary" href="update.php?setno='.$charrow['setno'].'">Update</a></td></tr>';
                     }
                 ?>

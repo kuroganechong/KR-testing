@@ -1,0 +1,218 @@
+devourer stats
+
+weap
+2545 99
+2376 73
+1968 12
+
+
+
+==6.689
+0:1888
+100:2557
+
+head
+1116 62
+971 17
+1035 37
+995 24
+1123 64
+
+
+==3.2
+0:917
+100:1237
+
+shoulder
+2043 33
+1966 21
+2452 96
+2431 93
+2025 30
+==7/6.458/6.48
+ave:6.646
+0:1826
+100:2479
+
+body
+3556 84
+3658 94
+3452 73
+3113 38
+3518 80
+==9.686/9.429/9.643
+ave:9.586
+0:2752
+100:3711
+
+
+feet 
+972 17
+1207 90
+
+
+==3.219
+0:917
+100:1239
+
+
+weapon
+11628 96 +9
+11624 96 +9 == +9 41/39 ==40  7786-11786
+11546 94 +9
+9465 89 +8
+
+
+head
+2103 98 +4
+2002 79 +4 == 5.316 1582-2114
+2841 56 +6
+3133 91 +6 ==8.343 2374-3208
+
+shoudler
+5889 69 +6
+4067 16 +5
+3934 73 +4
+3854 65 +4 == 10 3204-4204
+
+body
+9158 82 +6
+9116 80 +6
+10508 0 +8
+7589 90 +5
+
+leg
+3032 79 +6
+2994 74 +6
+1956 71 +4
+972 17 +0
+
+
+
+
+
+
+
+
+
+
+
+
+
+aurite stats
+
+weap 1638-2211
+
+head 620-837
+
+shoulder 1240-1674
+
+body 1860-2511
+
+feet 620-837
+
+
+
+
+Weapon
+        Accuracy
+        Attack
+        Attack Speed
+        Critical Damage
+        Critical Rate
+        Damage on Boss
+        Damage on Mobs
+        Penetration
+        SA Break
+        Soul Vapor Gain
+
+    Head
+        Accuracy
+        Attack
+        CD Reduction
+        Critical Damage
+        Critical Rate*
+        Defense
+        Evaded Attack Damage
+        Evasion
+        EXP Gain
+        HP
+
+    Shoulder
+        Accuracy
+        Attack
+        Attack Speed*
+        CD Reduction
+        Critical Damage
+        Defense
+        Evaded Attack Damage
+        Evasion
+        EXP Gain
+        HP
+
+    Body
+        Accuracy
+        Attack
+        CD Reduction
+        Critical Damage
+        Defense
+        Evaded Attack Damage
+        Evasion
+        EXP Gain
+        HP
+        HP%*
+
+    Feet
+        Accuracy
+        Attack
+        CD Reduction
+        Critical Damage
+        Defense
+        Evaded Attack Damage
+        Evasion
+        EXP Gain
+        HP
+        Move Speed*
+
+    Earring
+        Accuracy
+        Attack
+        Attack Speed
+        Critical Damage
+        Critical Rate
+        Damage Reduction from Boss
+        Defense
+        Evasion
+        EXP Gain
+        Max Stamina
+        Move Speed
+        On kill HP
+        SA Break
+        Soul Vapor Gain
+
+    Pendant
+        Accuracy
+        Attack
+        Attack Speed
+        CD Reduction
+        Critical Damage
+        Critical Resistance
+        Damage Reduction
+        Damage Reduction from Boss
+        Defense
+        Evasion
+        EXP Gain
+        Max Stamina
+        On kill HP
+        SA Break
+
+    Ring
+        Accuracy
+        Attack
+        Critical Damage
+        Critical Rate
+        Critical Resistance
+        Damage Reduction from Boss
+        Damage Reduction from Mob
+        Defense
+        Evasion

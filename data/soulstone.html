@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Members stats</title>
+    <meta name="description" content="Stats for each members of Miracle">
+    <meta name="author" content="sagiri">
+
+    <!-- Mobile Specific Metas
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet">
+
+    <!-- CSS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/skeleton.css">
+
+    <!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+
+    <!-- Vue JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://unpkg.com/vue"></script>
+
+    <style>
+        .ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        
+        .li {
+            float: left;
+        }
+        
+        .li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        /* Change the link color to #111 (black) on hover */
+        
+        .li a:hover {
+            background-color: #111;
+        }
+        
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="nav-bar">
+        <ul class="ul">
+            <li class="li active"><a href="/data/index.html">Knowledge Base</a></li>
+            <li class="li"><a href="../">Back</a></li>
+        </ul>
+    </div>
+    <!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container" id="app">
+        <div class="row">
+            <div class="six columns" style="margin-top:5%">
+                <h4>Soulstone upgrade</h4>
+            </div>
+        </div>
+
+        <ul>
+            <li>Tier: Low/Medium/High Frags (Cost)</li>
+            <li>T1: 10/0/0 (80k)</li>
+            <li>T2: 24/0/0 (200k)</li>
+            <li>T3: 40/1/0 (400k)</li>
+            <li>T4: 40/3/1 (700k)</li>
+            <li>T5: 40/4/2 (1m)</li>
+            <li>T6: 80/7/3 (1.4m)</li>
+            <li>T7: 80/8/4 (2m)</li>
+            <li>T8: 160/16/8 (2.7m)</li>
+            <li>T9: 240/24/16 (3.5m)</li>
+        </ul>
+        <ul>
+            <li>Conversion costs</li>
+            <li>Low to low: 10k (30k for opposing element)</li>
+            <li>Mid to mid: 80k (240k for opposing element)</li>
+            <li>10 Low to mid: 80k</li>
+            <li>10 Mid to high: 240k</li>
+        </ul>
+
+        <div class="row">
+            <div class="six columns">
+                <h4>Soulstone calculator</h4>
+            </div>
+            <table class="u-full-width" id="calc">
+                <tbody>
+                    <tr>
+                        <td>From tier</td>
+                        <td>
+                            <select v-model="fromtier">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>To tier</td>
+                        <td>
+                            <select v-model="totier">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Low frags in inventory</td>
+                        <td><input type="number" v-model="lowi"></td>
+                    </tr>
+                    <tr>
+                        <td>Mid frags in inventory</td>
+                        <td><input type="number" v-model="midi"></td>
+                    </tr>
+                    <tr>
+                        <td>High frags in inventory</td>
+                        <td><input type="number" v-model="highi"></td>
+                    </tr>
+                    <tr>
+                        <td>Price of low frags</td>
+                        <td><input type="number" v-model="low"> zenny</td>
+                    </tr>
+                    <tr>
+                        <td>Price of mid frags</td>
+                        <td><input type="number" v-model="mid"> zenny</td>
+                    </tr>
+                    <tr>
+                        <td>Price of high frags</td>
+                        <td><input type="number" v-model="high"> zenny</td>
+                    </tr>
+                    <tr>
+                        <td>Cost to craft (before conversion)</td>
+                        <td>{{pbeforeconv}} zenny <br>To buy: Low = {{lbeforeconv}}, Mid = {{mbeforeconv}}, High = {{hbeforeconv}}, Crafting fee = {{craft}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cost to craft (after conversion)</td>
+                        <td>{{cost}} zenny (Saved: {{pbeforeconv - cost}})<br>To buy: Low = {{lowtb}}, Mid = {{midtb}}, High = {{hightb}}, Conversion fee = {{convert}}, Crafting fee = {{craft}}
+                            <div v-if="(pbeforeconv - cost) > 0"><br>Method: Convert {{(hbeforeconv - hightb) * 100 + (mbeforeconv - midtb) * 10}} low frags to mid frags, then convert {{(hbeforeconv - hightb)*10}} mid frags to high frags</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
+
+        <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
+    </div>
+
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script>
+        var t01l = 10;
+        t01m = 0;
+        t01h = 0;
+        t01p = 80000;
+        var t12l = 24;
+        t12m = 0;
+        t12h = 0;
+        t12p = 200000;
+        var t23l = 40;
+        t23m = 1;
+        t23h = 0;
+        t23p = 400000;
+        var t34l = 40;
+        t34m = 3;
+        t34h = 1;
+        t34p = 700000;
+        var t45l = 40;
+        t45m = 4;
+        t45h = 2;
+        t45p = 1000000;
+        var t56l = 80;
+        t56m = 7;
+        t56h = 3;
+        t56p = 1400000;
+        var t67l = 80;
+        t67m = 8;
+        t67h = 4;
+        t67p = 2000000;
+        var t78l = 160;
+        t78m = 16;
+        t78h = 8;
+        t78p = 2700000;
+        var t89l = 240;
+        t89m = 24;
+        t89h = 16;
+        t89p = 3500000;
+        var ltmc = 80000;
+        mthc = 240000;
+        array = [
+            [t01l, t01m, t01h, t01p],
+            [t12l, t12m, t12h, t12p],
+            [t23l, t23m, t23h, t23p],
+            [t34l, t34m, t34h, t34p],
+            [t45l, t45m, t45h, t45p],
+            [t56l, t56m, t56h, t56p],
+            [t67l, t67m, t67h, t67p],
+            [t78l, t78m, t78h, t78p],
+            [t89l, t89m, t89h, t89p]
+        ];
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                fromtier: 0,
+                totier: 9,
+                lowi: 0,
+                midi: 0,
+                highi: 0,
+                low: 0,
+                mid: 0,
+                high: 0,
+                lowtb: 0,
+                midtb: 0,
+                hightb: 0,
+                craft: 0,
+                convert: 0,
+                pbeforeconv: 0,
+                lbeforeconv: 0,
+                mbeforeconv: 0,
+                hbeforeconv: 0
+            },
+            computed: {
+                cost: function() {
+                    lowr = 0;
+                    midr = 0;
+                    highr = 0;
+                    pricer = 0;
+                    if (this.totier <= this.fromtier) {
+                        this.pbeforeconv = 0;
+                        return totalcost = 0;
+                    }
+                    var tt = this.totier - this.fromtier;
+                    for (i = 0; i < tt; i++) {
+                        index = Number(this.fromtier) + i;
+                        lowr = lowr + array[index][0];
+                        midr = midr + array[index][1];
+                        highr = highr + array[index][2];
+                        pricer = pricer + array[index][3];
+                    }
+                    if (this.lowi > lowr) {
+                        l = 0
+                    } else {
+                        l = lowr - this.lowi
+                    }
+                    if (this.midi > midr) {
+                        m = 0
+                    } else {
+                        m = midr - this.midi
+                    }
+                    if (this.highi > highr) {
+                        h = 0
+                    } else {
+                        h = highr - this.highi
+                    }
+                    this.pbeforeconv = l * this.low + m * this.mid + h * this.high + pricer;
+                    this.lbeforeconv = l;
+                    this.mbeforeconv = m;
+                    this.hbeforeconv = h;
+
+                    // conversion
+                    p = 0;
+                    if (this.high > (mthc + 10 * this.mid)) {
+                        m = m + h * 10;
+                        p = p + h * mthc;
+                        h = 0;
+                        if (this.mid > (ltmc + 10 * this.low)) {
+                            l = l + m * 10;
+                            p = p + m * ltmc;
+                            m = 0;
+                        }
+                    } else {
+                        if (this.mid > (ltmc + 10 * this.low)) {
+                            l = l + m * 10;
+                            p = p + m * ltmc;
+                            m = 0;
+                        }
+                    }
+                    arr = [l, m, h, p];
+                    this.lowtb = l;
+                    this.midtb = m;
+                    this.hightb = h;
+                    this.convert = p;
+                    this.craft = pricer;
+                    return totalcost = l * this.low + m * this.mid + h * this.high + pricer + p;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
