@@ -60,36 +60,52 @@ weapon
 11628 96 +9
 11624 96 +9 == +9 41/39 ==40  7786-11786
 11546 94 +9
+11375 88 +9
 9465 89 +8
+9584 94 +8
+5254 92 +5
 
 
 head
 2103 98 +4
 2002 79 +4 == 5.316 1582-2114
+2002 79 +4
+2041 86 +4
+2463 80 +5
 2841 56 +6
 3133 91 +6 ==8.343 2374-3208
+3157 94 +6
+
 
 shoudler
 5889 69 +6
 4067 16 +5
 3934 73 +4
 3854 65 +4 == 10 3204-4204
+4004 79 +4
+3963 75 +4
+3787 59 +4
+4056 84 +4
 
 body
 9158 82 +6
 9116 80 +6
+8699 63 +6
 10508 0 +8
 7589 90 +5
+5877 71 +4
+1877 56 +4
+5810 67 +4
+6121 86 +4
 
 leg
 3032 79 +6
 2994 74 +6
 1956 71 +4
+1959 71 +4
+1988 71 +4
+2093 96 +4
 972 17 +0
-
-
-
-
 
 
 
@@ -112,107 +128,4 @@ body 1860-2511
 feet 620-837
 
 
-
-
-Weapon
-        Accuracy
-        Attack
-        Attack Speed
-        Critical Damage
-        Critical Rate
-        Damage on Boss
-        Damage on Mobs
-        Penetration
-        SA Break
-        Soul Vapor Gain
-
-    Head
-        Accuracy
-        Attack
-        CD Reduction
-        Critical Damage
-        Critical Rate*
-        Defense
-        Evaded Attack Damage
-        Evasion
-        EXP Gain
-        HP
-
-    Shoulder
-        Accuracy
-        Attack
-        Attack Speed*
-        CD Reduction
-        Critical Damage
-        Defense
-        Evaded Attack Damage
-        Evasion
-        EXP Gain
-        HP
-
-    Body
-        Accuracy
-        Attack
-        CD Reduction
-        Critical Damage
-        Defense
-        Evaded Attack Damage
-        Evasion
-        EXP Gain
-        HP
-        HP%*
-
-    Feet
-        Accuracy
-        Attack
-        CD Reduction
-        Critical Damage
-        Defense
-        Evaded Attack Damage
-        Evasion
-        EXP Gain
-        HP
-        Move Speed*
-
-    Earring
-        Accuracy
-        Attack
-        Attack Speed
-        Critical Damage
-        Critical Rate
-        Damage Reduction from Boss
-        Defense
-        Evasion
-        EXP Gain
-        Max Stamina
-        Move Speed
-        On kill HP
-        SA Break
-        Soul Vapor Gain
-
-    Pendant
-        Accuracy
-        Attack
-        Attack Speed
-        CD Reduction
-        Critical Damage
-        Critical Resistance
-        Damage Reduction
-        Damage Reduction from Boss
-        Defense
-        Evasion
-        EXP Gain
-        Max Stamina
-        On kill HP
-        SA Break
-
-    Ring
-        Accuracy
-        Attack
-        Critical Damage
-        Critical Rate
-        Critical Resistance
-        Damage Reduction from Boss
-        Damage Reduction from Mob
-        Defense
-        Evasion
+upgrade 1 star T1: 1 1 star gives 6.66%

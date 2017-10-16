@@ -6,8 +6,8 @@
     <!-- Basic Page Needs
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Members stats</title>
-    <meta name="description" content="Stats for each members of Miracle">
+    <title>Miracle - Soulstone Calculator</title>
+    <meta name="description" content="Soulstones data and calculator">
     <meta name="author" content="sagiri">
 
     <!-- Mobile Specific Metas
@@ -60,6 +60,66 @@
         .active {
             background-color: #4CAF50;
         }
+        
+        .lowfrag {
+            color: #67887d
+        }
+        
+        .midfrag {
+            color: #479d47
+        }
+        
+        .highfrag {
+            color: blue
+        }
+        
+        .lowborder:focus {
+            border-color: #67887d!important
+        }
+        
+        .midborder:focus {
+            border-color: #479d47!important
+        }
+        
+        .highborder:focus {
+            border-color: blue!important
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -60px;
+        }
+        
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
     </style>
 
 </head>
@@ -75,105 +135,104 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="container" id="app">
         <div class="row">
-            <div class="six columns" style="margin-top:5%">
+            <div class="four columns" style="margin-top:5%">
                 <h4>Soulstone upgrade</h4>
+
+                <ul>
+                    <li>Tier: Low/Medium/High Frags (Cost)</li>
+                    <li>T1: 10/0/0 (80k)</li>
+                    <li>T2: 24/0/0 (200k)</li>
+                    <li>T3: 40/1/0 (400k)</li>
+                    <li>T4: 40/3/1 (700k)</li>
+                    <li>T5: 40/4/2 (1m)</li>
+                    <li>T6: 80/7/3 (1.4m)</li>
+                    <li>T7: 80/8/4 (2m)</li>
+                    <li>T8: 160/16/8 (2.7m)</li>
+                    <li>T9: 240/24/16 (3.5m)</li>
+                </ul>
+                <ul>
+                    <li>Conversion costs</li>
+                    <li>Low to low: 10k (30k for opposing element)</li>
+                    <li>Mid to mid: 80k (240k for opposing element)</li>
+                    <li>10 Low to mid: 80k</li>
+                    <li>10 Mid to high: 240k</li>
+                </ul>
+            </div>
+            <div class="eight columns" style="margin-top:5%">
+                <h4>Soulstone calculator</h4>
+                <table class="u-full-width" id="calc">
+                    <tbody>
+                        <tr>
+                            <td>From tier</td>
+                            <td>
+                                <select v-model="fromtier">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4" style="color:green">4</option>
+                                    <option value="5" style="color:green">5</option>
+                                    <option value="6" style="color:green">6</option>
+                                    <option value="7" style="color:blue">7</option>
+                                    <option value="8" style="color:blue">8</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>To tier</td>
+                            <td>
+                                <select v-model="totier">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4" style="color:green">4</option>
+                                    <option value="5" style="color:green">5</option>
+                                    <option value="6" style="color:green">6</option>
+                                    <option value="7" style="color:blue">7</option>
+                                    <option value="8" style="color:blue">8</option>
+                                    <option value="9" style="color:blue">9</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lowfrag">Low frags in inventory</td>
+                            <td><input class="lowborder" type="number" v-model="lowi"></td>
+                        </tr>
+                        <tr>
+                            <td class="midfrag">Mid frags in inventory</td>
+                            <td><input class="midborder" type="number" v-model="midi"></td>
+                        </tr>
+                        <tr>
+                            <td class="highfrag">High frags in inventory</td>
+                            <td><input class="highborder" type="number" v-model="highi"></td>
+                        </tr>
+                        <tr>
+                            <td class="lowfrag">Price of low frags</td>
+                            <td><input class="lowborder" type="number" v-model="low"> <img src="../images/zenny.png"> </td>
+                        </tr>
+                        <tr>
+                            <td class="midfrag">Price of mid frags</td>
+                            <td><input class="midborder" type="number" v-model="mid"> <img src="../images/zenny.png"> </td>
+                        </tr>
+                        <tr>
+                            <td class="highfrag">Price of high frags</td>
+                            <td><input class="highborder" type="number" v-model="high"> <img src="../images/zenny.png"> </td>
+                        </tr>
+                        <tr>
+                            <td>Lowest crafting cost</td>
+                            <td><code>{{cost}} <img src="../images/zenny.png" style="height:60%;width:auto"></code> (
+                                <code class="tooltip">{{cost - convert - craft}}<span class="tooltiptext">Fragments</span></code> + <code class="tooltip">{{craft}}<span class="tooltiptext">Crafting fee</span></code> + <code class="tooltip">{{convert}}<span class="tooltiptext">Conversion fee</span></code>)<br>
+                                <br>Total frags needed: Low = <code>{{lowr}}</code>, Mid = <code>{{midr}}</code>, High = <code>{{highr}}</code>
+                                <br>To buy: Low = <code>{{lowtb}}</code>, Mid = <code>{{midtb}}</code>, High = <code>{{hightb}}</code>
+                                <br><br>Method: Convert <code>{{ltmcounter}}</code> low frags to mid frags, then convert <code>{{mthcounter}}</code> mid frags to high frags
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <ul>
-            <li>Tier: Low/Medium/High Frags (Cost)</li>
-            <li>T1: 10/0/0 (80k)</li>
-            <li>T2: 24/0/0 (200k)</li>
-            <li>T3: 40/1/0 (400k)</li>
-            <li>T4: 40/3/1 (700k)</li>
-            <li>T5: 40/4/2 (1m)</li>
-            <li>T6: 80/7/3 (1.4m)</li>
-            <li>T7: 80/8/4 (2m)</li>
-            <li>T8: 160/16/8 (2.7m)</li>
-            <li>T9: 240/24/16 (3.5m)</li>
-        </ul>
-        <ul>
-            <li>Conversion costs</li>
-            <li>Low to low: 10k (30k for opposing element)</li>
-            <li>Mid to mid: 80k (240k for opposing element)</li>
-            <li>10 Low to mid: 80k</li>
-            <li>10 Mid to high: 240k</li>
-        </ul>
-
         <div class="row">
-            <div class="six columns">
-                <h4>Soulstone calculator</h4>
-            </div>
-            <table class="u-full-width" id="calc">
-                <tbody>
-                    <tr>
-                        <td>From tier</td>
-                        <td>
-                            <select v-model="fromtier">
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>To tier</td>
-                        <td>
-                            <select v-model="totier">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Low frags in inventory</td>
-                        <td><input type="number" v-model="lowi"></td>
-                    </tr>
-                    <tr>
-                        <td>Mid frags in inventory</td>
-                        <td><input type="number" v-model="midi"></td>
-                    </tr>
-                    <tr>
-                        <td>High frags in inventory</td>
-                        <td><input type="number" v-model="highi"></td>
-                    </tr>
-                    <tr>
-                        <td>Price of low frags</td>
-                        <td><input type="number" v-model="low"> zenny</td>
-                    </tr>
-                    <tr>
-                        <td>Price of mid frags</td>
-                        <td><input type="number" v-model="mid"> zenny</td>
-                    </tr>
-                    <tr>
-                        <td>Price of high frags</td>
-                        <td><input type="number" v-model="high"> zenny</td>
-                    </tr>
-                    <tr>
-                        <td>Cost to craft <span v-if="(pbeforeconv - cost) > 0">(before conversion)</span></td>
-                        <td>{{pbeforeconv}} zenny <br>To buy: Low = {{lbeforeconv}}, Mid = {{mbeforeconv}}, High = {{hbeforeconv}}, Crafting fee = {{craft}}</td>
-                    </tr>
-                    <tr v-if="(pbeforeconv - cost) > 0">
-                        <td>Cost to craft (after conversion)</td>
-                        <td>{{cost}} zenny (Saved: {{pbeforeconv - cost}})<br>To buy: Low = {{lowtb}}, Mid = {{midtb}}, High = {{hightb}}, Conversion fee = {{convert}}, Crafting fee = {{craft}}
-                            <br>Method: Convert {{(hbeforeconv - hightb) * 100 + (mbeforeconv - midtb) * 10}} low frags to mid frags, then convert {{(hbeforeconv - hightb)*10}} mid frags to high frags
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
         <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
@@ -238,7 +297,7 @@
             el: '#app',
             data: {
                 fromtier: 0,
-                totier: 9,
+                totier: 1,
                 lowi: 0,
                 midi: 0,
                 highi: 0,
@@ -250,10 +309,11 @@
                 hightb: 0,
                 craft: 0,
                 convert: 0,
-                pbeforeconv: 0,
-                lbeforeconv: 0,
-                mbeforeconv: 0,
-                hbeforeconv: 0
+                mthcounter: 0,
+                ltmcounter: 0,
+                lowr: 0,
+                midr: 0,
+                highr: 0
             },
             computed: {
                 cost: function() {
@@ -273,49 +333,107 @@
                         highr = highr + array[index][2];
                         pricer = pricer + array[index][3];
                     }
-                    if (this.lowi > lowr) {
-                        l = 0
+                    this.lowr = lowr;
+                    this.midr = midr;
+                    this.highr = highr;
+
+                    // Conversion logic
+                    lex = 0;
+                    mex = 0;
+                    hex = 0;
+                    p = 0;
+                    mthcounter = 0;
+                    ltmcounter = 0;
+                    // Check any extras
+                    if (this.highi > highr) {
+                        h = 0;
                     } else {
-                        l = lowr - this.lowi
+                        h = highr - this.highi;
                     }
                     if (this.midi > midr) {
-                        m = 0
+                        m = 0;
+                        if (h != 0) {
+                            mex = this.midi - midr;
+                            if (this.high > mthc) {
+                                minsetsof10 = Math.floor(mex / 10);
+                                for (i = 0; i < minsetsof10; i++) {
+                                    if (h <= 0) {
+                                        break;
+                                    }
+                                    h = h - 1;
+                                    p = p + mthc;
+                                    mthcounter++;
+                                }
+                                if (mex % 10 != 0 && h != 0 && this.high > (mthc + (10 - (mex % 10)) * this.mid)) {
+                                    mcom = (10 - (mex % 10));
+                                    m = m + mcom;
+                                    h = h - 1;
+                                    p = p + mthc;
+                                    mthcounter = mthcounter + mcom / 10;
+                                }
+                                if (h != 0 && this.high > (mthc + 10 * this.mid)) {
+                                    mthcounter = mthcounter + h;
+                                    m = m + h * 10;
+                                    p = p + h * mthc;
+                                    h = 0;
+                                }
+                            }
+                        }
                     } else {
                         m = midr - this.midi
+                        if (h != 0 && this.high > (mthc + 10 * this.mid)) {
+                            mthcounter = mthcounter + h;
+                            m = m + h * 10;
+                            p = p + h * mthc;
+                            h = 0;
+                        }
                     }
-                    if (this.highi > highr) {
-                        h = 0
+                    if (this.lowi > lowr) {
+                        l = 0;
+                        if (m != 0) {
+                            lex = this.lowi - lowr;
+                            if (this.mid > ltmc) {
+                                linsetsof10 = Math.floor(lex / 10);
+                                ltmcounter = 0;
+                                for (i = 0; i < linsetsof10; i++) {
+                                    if (m <= 0) {
+                                        break;
+                                    }
+                                    m = m - 1;
+                                    p = p + ltmc;
+                                    ltmcounter++;
+                                }
+                                if (lex % 10 != 0 && m != 0 && this.mid > (ltmc + (10 - (lex % 10)) * this.low)) {
+                                    lcom = (10 - (lex % 10));
+                                    l = l + lcom;
+                                    m = m - 1;
+                                    p = p + ltmc;
+                                    ltmcounter = ltmcounter + lcom / 10;
+                                }
+                                if (m != 0 && this.mid > (ltmc + 10 * this.low)) {
+                                    ltmcounter = ltmcounter + m;
+                                    l = l + m * 10;
+                                    p = p + m * ltmc;
+                                    m = 0;
+                                }
+                            }
+                        }
                     } else {
-                        h = highr - this.highi
+                        l = lowr - this.lowi;
+                        if (m != 0 && this.mid > (ltmc + 10 * this.low)) {
+                            ltmcounter = ltmcounter + m;
+                            l = l + m * 10;
+                            p = p + m * ltmc;
+                            m = 0;
+                        }
                     }
-                    this.pbeforeconv = l * this.low + m * this.mid + h * this.high + pricer;
-                    this.lbeforeconv = l;
-                    this.mbeforeconv = m;
-                    this.hbeforeconv = h;
 
-                    // conversion
-                    p = 0;
-                    if (this.high > (mthc + 10 * this.mid)) {
-                        m = m + h * 10;
-                        p = p + h * mthc;
-                        h = 0;
-                        if (this.mid > (ltmc + 10 * this.low)) {
-                            l = l + m * 10;
-                            p = p + m * ltmc;
-                            m = 0;
-                        }
-                    } else {
-                        if (this.mid > (ltmc + 10 * this.low)) {
-                            l = l + m * 10;
-                            p = p + m * ltmc;
-                            m = 0;
-                        }
-                    }
-                    arr = [l, m, h, p];
                     this.lowtb = l;
                     this.midtb = m;
                     this.hightb = h;
                     this.convert = p;
+                    this.mthcounter = mthcounter * 10;
+                    this.ltmcounter = ltmcounter * 10;
                     this.craft = pricer;
                     return totalcost = l * this.low + m * this.mid + h * this.high + pricer + p;
                 }
