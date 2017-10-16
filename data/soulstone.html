@@ -222,9 +222,10 @@
                             <td>Lowest crafting cost</td>
                             <td><code>{{cost}} <img src="../images/zenny.png" style="height:60%;width:auto"></code> (
                                 <code class="tooltip">{{cost - convert - craft}}<span class="tooltiptext">Fragments</span></code> + <code class="tooltip">{{craft}}<span class="tooltiptext">Crafting fee</span></code> + <code class="tooltip">{{convert}}<span class="tooltiptext">Conversion fee</span></code>)<br>
-                                <br>Total frags needed: Low = <code>{{lowr}}</code>, Mid = <code>{{midr}}</code>, High = <code>{{highr}}</code>
-                                <br>To buy: Low = <code>{{lowtb}}</code>, Mid = <code>{{midtb}}</code>, High = <code>{{hightb}}</code>
-                                <br><br>Method: Convert <code>{{ltmcounter}}</code> low frags to mid frags, then convert <code>{{mthcounter}}</code> mid frags to high frags
+                                <br>Total frags needed: <span class="lowfrag">Low</span> = <code>{{lowr}}</code>, <span class="midfrag">Mid</span> = <code>{{midr}}</code>, <span class="highfrag">High</span> = <code>{{highr}}</code>
+                                <br>To buy: <span class="lowfrag">Low</span> = <code>{{lowtb}}</code>, <span class="midfrag">Mid</span> = <code>{{midtb}}</code>, <span class="highfrag">High</span> = <code>{{hightb}}</code>
+                                <br><br>Method: Convert <code>{{ltmcounter}}</code> <span class="lowfrag">low frags</span> to <span class="midfrag">mid frags</span>, then convert <code>{{mthcounter}}</code> <span class="midfrag">mid frags</span> to
+                                <span class="highfrag">high frags</span>
                             </td>
                         </tr>
                     </tbody>
