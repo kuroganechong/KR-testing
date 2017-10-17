@@ -98,7 +98,17 @@
                     dmgrd,
                     bossdmgrd,
                     mobdmgrd,
-                    primaldef
+                    primaldef,
+                    ar1,
+                    ar1t,
+                    ar2,
+                    ar2t,
+                    ar3,
+                    ar3t,
+                    ar4,
+                    ar4t,
+                    ar5,
+                    ar5t
                 ) VALUES (
                     :setno,
                     :minatk,
@@ -118,7 +128,17 @@
                     :dmgrd,
                     :bossdmgrd,
                     :mobdmgrd,
-                    :primaldef
+                    :primaldef,
+                    :ar1,
+                    :ar1t,
+                    :ar2,
+                    :ar2t,
+                    :ar3,
+                    :ar3t,
+                    :ar4,
+                    :ar4t,
+                    :ar5,
+                    :ar5t
                 )
             ";
             $query_params = array(
@@ -140,7 +160,17 @@
                 ':dmgrd' => $_POST['dmgrd'],
                 ':bossdmgrd' => $_POST['bossdmgrd'],
                 ':mobdmgrd' => $_POST['mobdmgrd'],
-                ':primaldef' => $_POST['primaldef']
+                ':primaldef' => $_POST['primaldef'],
+                ':ar1' => $_POST['ar1'],
+                ':ar1t' => $_POST['ar1t'],
+                ':ar2' => $_POST['ar2'],
+                ':ar2t' => $_POST['ar2t'],
+                ':ar3' => $_POST['ar3'],
+                ':ar3t' => $_POST['ar3t'],
+                ':ar4' => $_POST['ar4'],
+                ':ar4t' => $_POST['ar4t'],
+                ':ar5' => $_POST['ar5'],
+                ':ar5t' => $_POST['ar5t']
             );
             try
             {
@@ -205,7 +235,17 @@
                     dmgrd = :dmgrd,
                     bossdmgrd = :bossdmgrd,
                     mobdmgrd = :mobdmgrd,
-                    primaldef = :primaldef
+                    primaldef = :primaldef,
+                    ar1 = :ar1,
+                    ar1t = :ar1t,
+                    ar2 = :ar2,
+                    ar2t = :ar2t,
+                    ar3 = :ar3,
+                    ar3t = :ar3t,
+                    ar4 = :ar4,
+                    ar4t = :ar4t,
+                    ar5 = :ar5,
+                    ar5t = :ar5t
                 WHERE setno = :setno
             ";
             $query_params = array(
@@ -227,7 +267,17 @@
                 ':dmgrd' => $_POST['dmgrd'],
                 ':bossdmgrd' => $_POST['bossdmgrd'],
                 ':mobdmgrd' => $_POST['mobdmgrd'],
-                ':primaldef' => $_POST['primaldef']
+                ':primaldef' => $_POST['primaldef'],
+                ':ar1' => $_POST['ar1'],
+                ':ar1t' => $_POST['ar1t'],
+                ':ar2' => $_POST['ar2'],
+                ':ar2t' => $_POST['ar2t'],
+                ':ar3' => $_POST['ar3'],
+                ':ar3t' => $_POST['ar3t'],
+                ':ar4' => $_POST['ar4'],
+                ':ar4t' => $_POST['ar4t'],
+                ':ar5' => $_POST['ar5'],
+                ':ar5t' => $_POST['ar5t']
             );
             try
             {

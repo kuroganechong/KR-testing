@@ -221,6 +221,37 @@
             </tbody>
         </table>
 
+        <h5>AR Cards</h5>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Discord name</th>
+                    <th>IGN</th>
+                    <th>Class</th>
+
+                    <th>AR1</th>
+                    <th>AR2</th>
+                    <th>AR3</th>
+                    <th>AR4</th>
+                    <th>AR5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($statrows as $statrow){
+                        echo '<tr><td>'.$statrow['discordname'].'</td>';
+                        echo '<td>'.$statrow['charname'].'</td>';
+                        echo '<td>'.$statrow['charclass'].'</td>';
+
+                        echo '<td>'.$statrow['ar1'].' - T'.$statrow['ar1t'].'</td>';
+                        echo '<td>'.$statrow['ar2'].' - T'.$statrow['ar2t'].'</td>';
+                        echo '<td>'.$statrow['ar3'].' - T'.$statrow['ar3t'].'</td>';
+                        echo '<td>'.$statrow['ar4'].' - T'.$statrow['ar4t'].'</td>';
+                        echo '<td>'.$statrow['ar5'].' - T'.$statrow['ar5t'].'</td>';
+                    }
+                ?>
+            </tbody>
+        </table>
         <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
 
         <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->

@@ -159,7 +159,8 @@
                 </ul>
             </div>
             <div class="eight columns" style="margin-top:5%">
-                <h4>Soulstone calculator</h4>
+                <h4>Soulstone crafting calculator</h4>
+                <h6>Calculates the cheapest way to craft a specific soulstone of any element, after considering the market price, low to mid conversion rates, mid to high conversion rates and frags conversion rates between elements.</h6>
                 <table class="u-full-width" id="calc">
                     <tbody>
                         <tr>
@@ -208,11 +209,20 @@
                         </tr>
                         <tr>
                             <td class="lowfrag">Price of low frags</td>
-                            <td><input class="lowborder" type="number" v-model="low"> <img src="../images/zenny.png"> </td>
+                            <td><input class="lowborder" type="number" v-model="low"> <img src="../images/zenny.png">
+                                <br><span v-if="lowlarger">It's cheaper to convert <span class="lowfrag">low frags</span> of other elements in your inventory to use in crafting (instead of buying from market)!
+                                <br><br><span v-if="!lconverted">Amount of low frags(different element) you want to convert: <input type="number" v-model="l1" style="width:20%"> Cost of conversion: <code> {{l1cost}}</code> <a href="#" v-on:click="runl()">Convert</a>
+                                <br>Click the button to convert low frags(different element) and the calculator will update itself.</span><a href="#" v-if="lconverted" v-on:click="runl()">Convert again</span></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="midfrag">Price of mid frags</td>
-                            <td><input class="midborder" type="number" v-model="mid"> <img src="../images/zenny.png"> </td>
+                            <td><input class="midborder" type="number" v-model="mid"> <img src="../images/zenny.png">
+                                <br><span v-if="midlarger">It's cheaper to convert <span class="midfrag">mid frags</span> of other elements in your inventory to use in crafting (instead of buying from market)!
+                                <br><br><span v-if="!mconverted">Amount of mid frags(different element) you want to convert: <input type="number" v-model="m1" style="width:20%"> Cost of conversion: <code> {{m1cost}}</code> <a href="#" v-on:click="runm()">Convert</a>
+                                <br>Click the button to convert mid frags(different element) and the calculator will update itself.</span><a href="#" v-if="mconverted" v-on:click="runm()">Convert again</span>
+                                </span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="highfrag">Price of high frags</td>
@@ -220,13 +230,16 @@
                         </tr>
                         <tr>
                             <td>Lowest crafting cost</td>
-                            <td><code>{{cost}} <img src="../images/zenny.png" style="height:60%;width:auto"></code> (
-                                <code class="tooltip">{{cost - convert - craft}}<span class="tooltiptext">Fragments</span></code> + <code class="tooltip">{{craft}}<span class="tooltiptext">Crafting fee</span></code> + <code class="tooltip">{{convert}}<span class="tooltiptext">Conversion fee</span></code>)<br>
+                            <td><code>{{cost}} <img src="../images/zenny.png" style="height:60%;width:auto"></code><span v-if="lowlarger || midlarger"> + <code class="tooltip">{{eleconvert}}<span class="tooltiptext">Ele conversion fee</span></code></span>(
+                                <code class="tooltip">{{cost - convert - craft}}<span class="tooltiptext">Fragments</span></code> + <code class="tooltip">{{craft}}<span class="tooltiptext">Crafting fee</span></code> + <code class="tooltip">{{convert + eleconvert}}<span class="tooltiptext">Total conversion fee</span></code>)<br>
                                 <br>Total frags needed: <span class="lowfrag">Low</span> = <code>{{lowr}}</code>, <span class="midfrag">Mid</span> = <code>{{midr}}</code>, <span class="highfrag">High</span> = <code>{{highr}}</code>
                                 <br>To buy: <span class="lowfrag">Low</span> = <code>{{lowtb}}</code>, <span class="midfrag">Mid</span> = <code>{{midtb}}</code>, <span class="highfrag">High</span> = <code>{{hightb}}</code>
                                 <br><br>Method: Convert <code>{{ltmcounter}}</code> <span class="lowfrag">low frags</span> to <span class="midfrag">mid frags</span>, then convert <code>{{mthcounter}}</code> <span class="midfrag">mid frags</span> to
                                 <span class="highfrag">high frags</span>
                             </td>
+                        </tr>
+                        <tr><td></td>
+                            <td><a href="" class="button button-primary">Reset</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -314,7 +327,15 @@
                 ltmcounter: 0,
                 lowr: 0,
                 midr: 0,
-                highr: 0
+                highr: 0,
+                l1: 0,
+                m1: 0,
+                l1cost: 0,
+                m1cost: 0,
+                l1totalcost: 0,
+                m1totalcost: 0,
+                lconverted: false,
+                mconverted: false
             },
             computed: {
                 cost: function() {
@@ -437,7 +458,40 @@
                     this.ltmcounter = ltmcounter * 10;
                     this.craft = pricer;
                     return totalcost = l * this.low + m * this.mid + h * this.high + pricer + p;
+                },
+                lowlarger: function() {
+                    if (this.low > 10000) {
+                        return true;
+                    }
+                    return false;
+                },
+                midlarger: function() {
+                    if (this.mid > 80000) {
+                        return true;
+                    }
+                    return false;
+                },
+                eleconvert: function() {
+                    this.l1cost = this.l1 * 10000;
+                    this.m1cost = this.m1 * 80000;
+                    return Number(this.l1totalcost) + Number(this.m1totalcost);
                 }
+            },
+            methods: {
+                runl: function() {
+                    this.lconverted = !this.lconverted;
+                    if (this.lconverted) {
+                        this.lowi = Number(this.lowi) + Number(this.l1);
+                        this.l1totalcost = Number(this.l1totalcost) + Number(this.l1cost);
+                    }
+                },
+                runm: function() {
+                    this.mconverted = !this.mconverted;
+                    if (this.mconverted) {
+                        this.midi = Number(this.midi) + Number(this.m1);
+                        this.m1totalcost = Number(this.m1totalcost) + Number(this.m1cost);
+                    }
+                },
             }
         })
     </script>
