@@ -455,7 +455,7 @@
                     </li>
                 </ol>
 
-                <input class="button-primary" type="submit" value="Save">
+                <input class="button-primary" type="submit" value="Save">  <a href="index.php" class="button">Back</a>
             </form>
         <?php }else{ //update char ?>
             <form action="submit.php" method="post">
@@ -797,7 +797,7 @@
                     </li>
                 </ol>
 
-                <input class="button-primary" type="submit" value="Save">
+                <input class="button-primary" type="submit" value="Save"> <a href="index.php" class="button">Back</a>
             </form>
         <?php } ?>
     </div>
