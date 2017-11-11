@@ -128,6 +128,6 @@ body 1860-2511
 feet 620-837
 
 
-upgrade 1 star T1: 1 1 star gives 6.66%
-upgrade 2 star T1: 1 2,3,4,5 star gives 6.66%, 1 1 star gives 4.44%
-upgrade 2 star T2: 1 2,3,4,5 star gives 1.88%, 1 1 star gives 1.33%
+upgrade 1 star T1 to T2: 1 1 star gives 6.66%
+upgrade 2,3,4,5 star T1 to T2: 1 2,3,4,5 star gives 6.66%, 1 1 star gives 4.44%
+upgrade 2,3,4,5 star T2 to T3: 1 2,3,4,5 star gives 1.88%, 1 1 star gives 1.25%
