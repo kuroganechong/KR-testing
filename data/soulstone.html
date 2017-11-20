@@ -133,6 +133,69 @@
             height: 0;
             opacity: 0;
         }
+        
+        label {
+            font-weight: normal;
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 0;
+            width: 40px;
+            height: 30px;
+        }
+        
+        input[type="radio"] {
+            display: none;
+        }
+        
+        input[type="radio"]:checked+label {
+            background-color: #DCDCDC;
+        }
+        
+        input[type="radio"]:checked+label.mid {
+            background-color: #81D87D;
+            color: white;
+        }
+        
+        input[type="radio"]:checked+label.high {
+            background-color: #46A3FF;
+            color: white;
+        }
+        
+        .btn-group label {
+            border: 1px solid #D3D3D3;
+            cursor: pointer;
+            float: left;
+        }
+        
+        .btn-group label.first {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .btn-group label.last {
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .btn-group label.mid {
+            color: green;
+        }
+        
+        .btn-group label.high {
+            color: blue;
+        }
+        
+        .btn-group label:not(:last-child) {
+            border-right: none;
+        }
+        
+        .btn-group:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        .btn-group label:hover {
+            box-shadow: 1px 2px 3px 0px #808080;
+        }
     </style>
 
 </head>
@@ -178,34 +241,30 @@
                     <tbody>
                         <tr>
                             <td>From tier</td>
-                            <td>
-                                <select v-model="fromtier">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4" style="color:green">4</option>
-                                    <option value="5" style="color:green">5</option>
-                                    <option value="6" style="color:green">6</option>
-                                    <option value="7" style="color:blue">7</option>
-                                    <option value="8" style="color:blue">8</option>
-                                </select>
+                            <td class="btn-group">
+                                <input type="radio" name="fromtier" v-model="fromtier" value="0" id="f0"><label for="f0" class="first">0</label>
+                                <input type="radio" name="fromtier" v-model="fromtier" value="1" id="f1"><label for="f1">1</label>
+                                <input type="radio" name="fromtier" v-model="fromtier" value="2" id="f2"><label for="f2">2</label>
+                                <input type="radio" name="fromtier" v-model="fromtier" value="3" id="f3"><label for="f3">3</label>
+                                <input type="radio" name="fromtier" v-model="fromtier" value="4" id="f4"><label for="f4" class="mid">4</label>
+                                <input type="radio" name="fromtier" v-model="fromtier" value="5" id="f5"><label for="f5" class="mid">5</label>
+                                <input type="radio" name="fromtier" v-model="fromtier" value="6" id="f6"><label for="f6" class="mid">6</label>
+                                <input type="radio" name="fromtier" v-model="fromtier" value="7" id="f7"><label for="f7" class="high">7</label>
+                                <input type="radio" name="fromtier" v-model="fromtier" value="8" id="f8"><label for="f8" class="high last">8</label>
                             </td>
                         </tr>
                         <tr>
                             <td>To tier</td>
-                            <td>
-                                <select v-model="totier">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4" style="color:green">4</option>
-                                    <option value="5" style="color:green">5</option>
-                                    <option value="6" style="color:green">6</option>
-                                    <option value="7" style="color:blue">7</option>
-                                    <option value="8" style="color:blue">8</option>
-                                    <option value="9" style="color:blue">9</option>
-                                </select>
+                            <td class="btn-group">
+                                <input type="radio" name="totier" v-model="totier" value="1" id="t1"><label for="t1" class="first">1</label>
+                                <input type="radio" name="totier" v-model="totier" value="2" id="t2"><label for="t2">2</label>
+                                <input type="radio" name="totier" v-model="totier" value="3" id="t3"><label for="t3">3</label>
+                                <input type="radio" name="totier" v-model="totier" value="4" id="t4"><label for="t4" class="mid">4</label>
+                                <input type="radio" name="totier" v-model="totier" value="5" id="t5"><label for="t5" class="mid">5</label>
+                                <input type="radio" name="totier" v-model="totier" value="6" id="t6"><label for="t6" class="mid">6</label>
+                                <input type="radio" name="totier" v-model="totier" value="7" id="t7"><label for="t7" class="high">7</label>
+                                <input type="radio" name="totier" v-model="totier" value="8" id="t8"><label for="t8" class="high">8</label>
+                                <input type="radio" name="totier" v-model="totier" value="9" id="t9"><label for="t9" class="high last">9</label>
                             </td>
                         </tr>
                         <tr>
