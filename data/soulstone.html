@@ -93,7 +93,7 @@
         
         .tooltip .tooltiptext {
             visibility: hidden;
-            width: 120px;
+            width: 240px;
             background-color: black;
             color: #fff;
             text-align: center;
@@ -103,7 +103,7 @@
             z-index: 1;
             bottom: 150%;
             left: 50%;
-            margin-left: -60px;
+            margin-left: -120px;
         }
         
         .tooltip .tooltiptext::after {
@@ -119,6 +119,19 @@
         
         .tooltip:hover .tooltiptext {
             visibility: visible;
+        }
+        
+        .showhide-enter-active,
+        .showhide-leave-active {
+            transition: all .3s ease;
+            height: 100px;
+            overflow: hidden;
+        }
+        
+        .showhide-enter,
+        .showhide-leave-to {
+            height: 0;
+            opacity: 0;
         }
     </style>
 
@@ -197,45 +210,59 @@
                         </tr>
                         <tr>
                             <td class="lowfrag">Low frags in inventory</td>
-                            <td><input class="lowborder" type="number" v-model="lowi"></td>
+                            <td><input onClick="this.select();" class="lowborder" type="number" v-model="lowi">
+                                <transition name="showhide"><span v-if="lowlarger" class="showhide"><br>(Including: {{l1total}} converted from other elements)</span></transition>
+                            </td>
                         </tr>
                         <tr>
                             <td class="midfrag">Mid frags in inventory</td>
-                            <td><input class="midborder" type="number" v-model="midi"></td>
+                            <td><input onClick="this.select();" class="midborder" type="number" v-model="midi">
+                                <transition name="showhide"><span v-if="midlarger"><br>(Including: {{m1total}} converted from other elements)</span></transition>
+                            </td>
                         </tr>
                         <tr>
                             <td class="highfrag">High frags in inventory</td>
-                            <td><input class="highborder" type="number" v-model="highi"></td>
+                            <td><input onClick="this.select();" class="highborder" type="number" v-model="highi"></td>
                         </tr>
                         <tr>
                             <td class="lowfrag">Price of low frags</td>
-                            <td><input class="lowborder" type="number" v-model="low"> <img src="../images/zenny.png">
-                                <br><span v-if="lowlarger">It's cheaper to convert <span class="lowfrag">low frags</span> of other elements in your inventory to use in crafting (instead of buying from market)!
-                                <br><br><span v-if="!lconverted">Amount of low frags(different element) you want to convert: <input type="number" v-model="l1" style="width:20%"> Cost of conversion: <code> {{l1cost}}</code> <a href="#" v-on:click="runl()">Convert</a>
-                                <br>Click the button to convert low frags(different element) and the calculator will update itself.</span><a href="#" v-if="lconverted" v-on:click="runl()">Convert again</span></span>
+                            <td><input onClick="this.select();" class="lowborder" type="number" v-model="low"> <img src="../images/zenny.png">
+                                <transition name="showhide"><span v-if="lowlarger"><br>It's cheaper to convert <span class="lowfrag">low frags</span> of other elements in your inventory to use in crafting (instead of buying from market)! Please do so if you have some in your inventory,
+                                    or cancel if you don't have extra to convert. <br><br>To undo the amount converted, input the <strong>negative amount</strong> you want to undo. (eg. input -5 to remove 5 converted frags from calculator)
+                                    <br><br><span v-if="!lconverted">Please input the amount of low frags (different element) you want to convert: <br><input onClick="this.select();" type="number" v-model="l1" style="width:20%"> Cost of conversion: <code> {{l1cost}}</code> <a href="#/" v-on:click="runl()">Convert</a>
+                                    <a href="#/" v-on:click="canl()">Cancel</a>
+                                <br>Click the button to convert low frags(different element) and the calculator will update itself.</span><a href="#/" v-if="lconverted" v-on:click="runl()">Convert again</span></span></transition>
                             </td>
                         </tr>
                         <tr>
                             <td class="midfrag">Price of mid frags</td>
-                            <td><input class="midborder" type="number" v-model="mid"> <img src="../images/zenny.png">
-                                <br><span v-if="midlarger">It's cheaper to convert <span class="midfrag">mid frags</span> of other elements in your inventory to use in crafting (instead of buying from market)!
-                                <br><br><span v-if="!mconverted">Amount of mid frags(different element) you want to convert: <input type="number" v-model="m1" style="width:20%"> Cost of conversion: <code> {{m1cost}}</code> <a href="#" v-on:click="runm()">Convert</a>
-                                <br>Click the button to convert mid frags(different element) and the calculator will update itself.</span><a href="#" v-if="mconverted" v-on:click="runm()">Convert again</span>
-                                </span>
+                            <td><input onClick="this.select();" class="midborder" type="number" v-model="mid"> <img src="../images/zenny.png">
+                                <transition name="showhide"><span v-if="midlarger"><br>It's cheaper to convert <span class="midfrag">mid frags</span> of other elements in your inventory to use in crafting (instead of buying from market)! Please do so if you have some in your inventory, or cancel if you don't have extra to convert. 
+                                <br><br>To undo the amount converted, input the <strong>negative amount</strong> you want to undo. (eg. input -5 to remove 5 converted frags from calculator)
+                                <br><br><span v-if="!mconverted">Please input the amount of mid frags (different element) you want to convert: <br><input onClick="this.select();" type="number" v-model="m1" style="width:20%"> Cost of conversion: <code> {{m1cost}}</code> <a href="#/" v-on:click="runm()">Convert</a>
+                                    <a href="#/" v-on:click="canm()">Cancel</a>
+                                    <br>Click the button to convert mid frags(different element) and the calculator will update itself.</span><a href="#/" v-if="mconverted" v-on:click="runm()">Convert again</span>
+                                </span></transition>
                             </td>
                         </tr>
                         <tr>
                             <td class="highfrag">Price of high frags</td>
-                            <td><input class="highborder" type="number" v-model="high"> <img src="../images/zenny.png"> </td>
+                            <td><input onClick="this.select();" class="highborder" type="number" v-model="high"> <img src="../images/zenny.png"> </td>
                         </tr>
                         <tr>
                             <td>Lowest crafting cost</td>
-                            <td><code>{{cost}} <img src="../images/zenny.png" style="height:60%;width:auto"></code><span v-if="lowlarger || midlarger"> + <code class="tooltip">{{eleconvert}}<span class="tooltiptext">Ele conversion fee</span></code></span>(
-                                <code class="tooltip">{{cost - convert - craft}}<span class="tooltiptext">Fragments</span></code> + <code class="tooltip">{{craft}}<span class="tooltiptext">Crafting fee</span></code> + <code class="tooltip">{{convert + eleconvert}}<span class="tooltiptext">Total conversion fee</span></code>)<br>
+                            <td><code class="tooltip">{{cost + eleconvert}}<span class="tooltiptext">Total cost</span></code>(Breakdown:
+                                <code class="tooltip">{{cost - convert - craft}}<span class="tooltiptext">Fragments purchase cost</span></code>
+                                 + <code class="tooltip">{{craft}}<span class="tooltiptext">Crafting fee</span></code>
+                                  + <code class="tooltip">{{convert}}<span class="tooltiptext">L/M M/H conversion fee</span></code>
+                                  <span v-if="lowlarger || midlarger"> + <code class="tooltip">{{eleconvert}}<span class="tooltiptext">Element conversion fee</span></code></span>)<br>
+                                
                                 <br>Total frags needed: <span class="lowfrag">Low</span> = <code>{{lowr}}</code>, <span class="midfrag">Mid</span> = <code>{{midr}}</code>, <span class="highfrag">High</span> = <code>{{highr}}</code>
                                 <br>To buy: <span class="lowfrag">Low</span> = <code>{{lowtb}}</code>, <span class="midfrag">Mid</span> = <code>{{midtb}}</code>, <span class="highfrag">High</span> = <code>{{hightb}}</code>
-                                <br><br>Method: Convert <code>{{ltmcounter}}</code> <span class="lowfrag">low frags</span> to <span class="midfrag">mid frags</span>, then convert <code>{{mthcounter}}</code> <span class="midfrag">mid frags</span> to
-                                <span class="highfrag">high frags</span>
+                                
+                                <br><br>Method: First convert <span v-if="lowlarger || midlarger"><code>{{l1total}}</code> <span class="lowfrag">low frags</span> and <code>{{m1total}}</code> <span class="midfrag">mid frags</span> of other elements to the one you need, 
+                                next convert </code></span><code>{{ltmcounter}}</code> <span class="lowfrag">low frags</span> to <span class="midfrag">mid frags</span>, 
+                                then convert <code>{{mthcounter}}</code> <span class="midfrag">mid frags</span> to <span class="highfrag">high frags</span>.
                             </td>
                         </tr>
                         <tr><td></td>
@@ -330,6 +357,8 @@
                 highr: 0,
                 l1: 0,
                 m1: 0,
+                l1total: 0,
+                m1total: 0,
                 l1cost: 0,
                 m1cost: 0,
                 l1totalcost: 0,
@@ -482,16 +511,26 @@
                     this.lconverted = !this.lconverted;
                     if (this.lconverted) {
                         this.lowi = Number(this.lowi) + Number(this.l1);
+                        this.l1total += Number(this.l1);
                         this.l1totalcost = Number(this.l1totalcost) + Number(this.l1cost);
+                        this.l1 = 0;
                     }
                 },
                 runm: function() {
                     this.mconverted = !this.mconverted;
                     if (this.mconverted) {
                         this.midi = Number(this.midi) + Number(this.m1);
+                        this.m1total += Number(this.m1);
                         this.m1totalcost = Number(this.m1totalcost) + Number(this.m1cost);
+                        this.m1 = 0;
                     }
                 },
+                canl: function() {
+                    this.lconverted = !this.lconverted;
+                },
+                canm: function() {
+                    this.mconverted = !this.mconverted;
+                }
             }
         })
     </script>
