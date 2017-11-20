@@ -285,7 +285,7 @@
                         </tr>
                         <tr>
                             <td class="lowfrag">Price of low frags</td>
-                            <td><input onClick="this.select();" class="lowborder" type="number" v-model="low"> <img src="../images/zenny.png">
+                            <td><input onClick="this.select();" class="lowborder" type="number" v-model="low"> <img src="../images/zenny.PNG">
                                 <transition name="showhide"><span v-if="lowlarger"><br>It's cheaper to convert <span class="lowfrag">low frags</span> of other elements in your inventory to use in crafting (instead of buying from market)! Please do so if you have some in your inventory,
                                     or cancel if you don't have extra to convert. <br><br>To undo the amount converted, input the <strong>negative amount</strong> you want to undo. (eg. input -5 to remove 5 converted frags from calculator)
                                     <br><br><span v-if="!lconverted">Please input the amount of low frags (different element) you want to convert: <br><input onClick="this.select();" type="number" v-model="l1" style="width:20%"> Cost of conversion: <code> {{l1cost}}</code> <a href="#/" v-on:click="runl()">Convert</a>
@@ -295,7 +295,7 @@
                         </tr>
                         <tr>
                             <td class="midfrag">Price of mid frags</td>
-                            <td><input onClick="this.select();" class="midborder" type="number" v-model="mid"> <img src="../images/zenny.png">
+                            <td><input onClick="this.select();" class="midborder" type="number" v-model="mid"> <img src="../images/zenny.PNG">
                                 <transition name="showhide"><span v-if="midlarger"><br>It's cheaper to convert <span class="midfrag">mid frags</span> of other elements in your inventory to use in crafting (instead of buying from market)! Please do so if you have some in your inventory, or cancel if you don't have extra to convert. 
                                 <br><br>To undo the amount converted, input the <strong>negative amount</strong> you want to undo. (eg. input -5 to remove 5 converted frags from calculator)
                                 <br><br><span v-if="!mconverted">Please input the amount of mid frags (different element) you want to convert: <br><input onClick="this.select();" type="number" v-model="m1" style="width:20%"> Cost of conversion: <code> {{m1cost}}</code> <a href="#/" v-on:click="runm()">Convert</a>
@@ -306,7 +306,7 @@
                         </tr>
                         <tr>
                             <td class="highfrag">Price of high frags</td>
-                            <td><input onClick="this.select();" class="highborder" type="number" v-model="high"> <img src="../images/zenny.png"> </td>
+                            <td><input onClick="this.select();" class="highborder" type="number" v-model="high"> <img src="../images/zenny.PNG"> </td>
                         </tr>
                         <tr>
                             <td>Lowest crafting cost</td>
