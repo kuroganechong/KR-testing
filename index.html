@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Kiseki - Atk/Cdmg Calculator</title>
+    <meta name="description" content="Atk/Cdmg calculator">
+    <meta name="author" content="sagiri">
+
+    <!-- Mobile Specific Metas
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet">
+
+    <!-- CSS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+
+    <!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Vue JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://unpkg.com/vue"></script>
+
+    <style>
+        .ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        
+        .li {
+            float: left;
+        }
+        
+        .li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        /* Change the link color to #111 (black) on hover */
+        
+        .li a:hover {
+            background-color: #111;
+        }
+        
+        .active {
+            background-color: #4CAF50;
+        }
+        
+        .lowfrag {
+            color: #67887d
+        }
+        
+        .midfrag {
+            color: #479d47
+        }
+        
+        .highfrag {
+            color: blue
+        }
+        
+        .lowborder:focus {
+            border-color: #67887d!important
+        }
+        
+        .midborder:focus {
+            border-color: #479d47!important
+        }
+        
+        .highborder:focus {
+            border-color: blue!important
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 240px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -120px;
+        }
+        
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+        
+        .showhide-enter-active,
+        .showhide-leave-active {
+            transition: all .3s ease;
+            height: 100px;
+            overflow: hidden;
+        }
+        
+        .showhide-enter,
+        .showhide-leave-to {
+            height: 0;
+            opacity: 0;
+        }
+        
+        label {
+            font-weight: normal;
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 0;
+            width: 40px;
+            height: 30px;
+        }
+        
+        input[type="radio"] {
+            display: none;
+        }
+        
+        input[type="radio"]:checked+label {
+            background-color: #DCDCDC;
+        }
+        
+        input[type="radio"]:checked+label.mid {
+            background-color: #81D87D;
+            color: white;
+        }
+        
+        input[type="radio"]:checked+label.high {
+            background-color: #46A3FF;
+            color: white;
+        }
+        
+        .btn-group label {
+            border: 1px solid #D3D3D3;
+            cursor: pointer;
+            float: left;
+        }
+        
+        .btn-group label.first {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .btn-group label.last {
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .btn-group label.mid {
+            color: green;
+        }
+        
+        .btn-group label.high {
+            color: blue;
+        }
+        
+        .btn-group label:not(:last-child) {
+            border-right: none;
+        }
+        
+        .btn-group:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        .btn-group label:hover {
+            box-shadow: 1px 2px 3px 0px #808080;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="nav-bar">
+        <ul class="ul">
+            <li class="li active"><a href="data/index.html">SW stuff</a></li>
+        </ul>
+    </div>
+    <!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container" id="app">
+        <div class="row">
+            <h4>Atk/Cdmg calculator</h4>
+            <h6>Calculates the optimal number of atk/cdmg lines on your gear. <br> <code>Damage = [(Stat-menu-atk x gear-atk% x perk-&-skill-%atk-buff) + flat-atk-buff] x (2 + base-cdmg + cdmg-buff + gear-cdmg) x atk-type</code></h6>
+            <table class="u-full-width" id="calc">
+                <tbody>
+                    <tr>
+                        <td>Gear tier</td>
+                        <td class="btn-group">
+                            <input type="radio" name="tier" v-model="tier" value="6" id="f6"><label for="f6" class="first">6</label>
+                            <input type="radio" name="tier" v-model="tier" value="7" id="f7"><label for="f7" class="">7</label>
+                            <input type="radio" name="tier" v-model="tier" value="8" id="f8"><label for="f8" class="last">8</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Number of Gear Lines available (for atk/cdmg only)</td>
+                        <td><input type="number" v-model="M">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">UW + Base + Earring Raw Atk</td>
+                        <td><input type="number" v-model="OA">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Perk/Skill/Artifact %atk buff (after skill books effect)</td>
+                        <td><input type="number" v-model="ATK"> %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Crit Dmg not from gear (Base value seen in stat page + buffs + Perks)</td>
+                        <td><input type="number" v-model="Cd"> %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Attack Type Modifier (S1/S2/S3/Auto Attack) (Put 100% if not sure)</td>
+                        <td><input type="number" v-model="T"> %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Flat Attack Buff (from skills after skill books effect)</td>
+                        <td><input type="number" v-model="Fa">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Result</td>
+                        <td>
+                            Number of atk lines: <code>{{n}}</code> <br>
+                            Number of crit damage lines: <code>{{m}}</code> <br>
+                            Total Atk: <code>{{Math.round(n*b*100)}}%</code> <br>
+                            Total Crit Damage: <code>{{Math.round(BCd + m*a*100)}}%</code> <br>
+                            Final damage value: <code>{{f}}</code> <br>
+                        </td>
+                    </tr>
+                    <tr><td></td>
+                        <td><a href="" class="button button-primary">Reset</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+        </div>
+
+        <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
+
+        <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
+    </div>
+
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                tier: 8,
+                M: 16,
+                OA: 100,
+                ATK: 0,
+                T: 100,
+                Cd: 0,
+                Fa: 0
+            },
+            computed: {
+                a: function(){
+                    if(this.tier == 8){
+                        return 0.24
+                    } else if(this.tier == 7){
+                        return 0.22
+                    } else {
+                        return 0.20
+                    }
+                },
+                b: function(){
+                    if(this.tier == 8){
+                        return 0.12
+                    } else if(this.tier == 7){
+                        return 0.11
+                    } else {
+                        return 0.10
+                    }
+                },
+                A: function() {
+                    return (this.T/100*this.OA*this.BATK/100)
+                },
+                BATK: function(){
+                    return 100 + Number(this.ATK)
+                },
+                BCd: function() {
+                    return 200 + Number(this.Cd)
+                },
+                m: function() {
+                    return Math.round(this.Fa/(2*this.b*this.OA*this.BATK/100) + this.M/2 + 1/(2*this.b) - (1 + this.BCd/100)/(2*this.a))
+                },
+                n: function() {
+                    return Math.round(this.M - this.m)
+                },
+                f: function() {
+                    return Math.round((this.BCd/100 + 1 + this.a*this.m)*(this.A + this.b*this.A*this.n + this.T/100*this.Fa))
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
