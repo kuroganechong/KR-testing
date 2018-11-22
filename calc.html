@@ -211,9 +211,9 @@
     <div class="container" id="app">
         <div class="row">
             <h4>Atk/Cdmg calculator</h4>
-            <h6>Calculates the optimal number of atk/cdmg lines on your gear. <br> 
+            <h6>Calculates the real damage per hit. <br> 
                 <code>Damage = [(Stat-menu-atk x gear-atk% x perk-&-skill-%atk-buff) + flat-atk-buff] x (2 + base-cdmg + cdmg-buff + gear-cdmg) x atk-type</code> <br>
-                Since it doesn't calculate penetration, it is only accurate for 0 def enemies such as training dummy for now, but generally it optimises damage regardless of enemies def value.
+                Since it doesn't calculate penetration, it is only accurate for 0 def enemies such as training dummy for now.
             </h6>
             <table class="u-full-width" id="calc">
                 <tbody>
@@ -226,8 +226,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Number of Gear Lines available <br>(for atk/cdmg only)</td>
-                        <td><input type="number" v-model="M">
+                        <td class="">Number of Cdmg lines <br> excluding enchants/UT/rune</td>
+                        <td><input type="number" v-model="m">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Number of Atk lines <br> excluding enchants/UT/rune</td>
+                        <td><input type="number" v-model="n">
                         </td>
                     </tr>
                     <tr>
@@ -325,14 +330,15 @@
             el: '#app',
             data: {
                 tier: 8,
-                M: 16,
+                m: 0,
+                n: 0,
                 star: 0,
                 cl: 1,
                 ear: 'y',
                 R1: 0,
                 R2: 0,
                 ATK: 0,
-                T: 100,
+                T: 82.07885,
                 Cd: 0,
                 Fa: 0
             },
@@ -506,12 +512,6 @@
                         x = 0
                     }
                     return 200 + Number(this.Cd) + Number(this.R2) + Number(x)
-                },
-                m: function() {
-                    return Math.round(this.Fa/(2*this.b*this.OA*this.BATK/100) + this.M/2 + (1 + this.R1/100)/(2*this.b) - (1 + this.BCd/100)/(2*this.a))
-                },
-                n: function() {
-                    return Math.round(this.M - this.m)
                 },
                 f: function() {
                     return Math.round((this.BCd/100 + 1 + this.a*this.m)*(this.A + this.A*this.R1/100 + this.b*this.A*this.n + this.T/100*this.Fa))
