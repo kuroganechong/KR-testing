@@ -6,8 +6,8 @@
     <!-- Basic Page Needs
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Kiseki - Atk/Cdmg Calculator</title>
-    <meta name="description" content="Atk/Cdmg calculator">
+    <title>Kiseki - Damage Calculator</title>
+    <meta name="description" content="Damage calculator">
     <meta name="author" content="sagiri">
 
     <!-- Mobile Specific Metas
@@ -55,34 +55,6 @@
         
         .li a:hover {
             background-color: #111;
-        }
-        
-        .active {
-            background-color: #4CAF50;
-        }
-        
-        .lowfrag {
-            color: #67887d
-        }
-        
-        .midfrag {
-            color: #479d47
-        }
-        
-        .highfrag {
-            color: blue
-        }
-        
-        .lowborder:focus {
-            border-color: #67887d!important
-        }
-        
-        .midborder:focus {
-            border-color: #479d47!important
-        }
-        
-        .highborder:focus {
-            border-color: blue!important
         }
         
         .tooltip {
@@ -150,15 +122,13 @@
         input[type="radio"]:checked+label {
             background-color: #DCDCDC;
         }
-        
-        input[type="radio"]:checked+label.mid {
-            background-color: #81D87D;
-            color: white;
+
+        input[type="checkbox"] {
+            display: none;
         }
         
-        input[type="radio"]:checked+label.high {
-            background-color: #46A3FF;
-            color: white;
+        input[type="checkbox"]:checked+label {
+            background-color: #DCDCDC;
         }
         
         .btn-group label {
@@ -173,14 +143,12 @@
         
         .btn-group label.last {
             border-radius: 0 4px 4px 0;
+            border-right: 1px solid #D3D3D3!important;
         }
-        
-        .btn-group label.mid {
-            color: green;
-        }
-        
-        .btn-group label.high {
-            color: blue;
+
+        .btn-group label.one {
+            border-radius: 4px 4px 4px 4px;
+            border-right: 1px solid #D3D3D3!important;
         }
         
         .btn-group label:not(:last-child) {
@@ -210,31 +178,13 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="container" id="app">
         <div class="row">
-            <h4>Atk/Cdmg calculator</h4>
+            <h4>Damage calculator</h4>
             <h6>Calculates the real damage per hit. <br> 
                 <code>Damage = [(Stat-menu-atk x gear-atk% x perk-&-skill-%atk-buff) + flat-atk-buff] x (2 + base-cdmg + cdmg-buff + gear-cdmg) x atk-type</code> <br>
                 Since it doesn't calculate penetration, it is only accurate for 0 def enemies such as training dummy for now.
             </h6>
             <table class="u-full-width" id="calc">
                 <tbody>
-                    <tr>
-                        <td>Gear tier</td>
-                        <td class="btn-group">
-                            <input type="radio" name="tier" v-model="tier" value="6" id="f6"><label for="f6" class="first">6</label>
-                            <input type="radio" name="tier" v-model="tier" value="7" id="f7"><label for="f7" class="">7</label>
-                            <input type="radio" name="tier" v-model="tier" value="8" id="f8"><label for="f8" class="last">8</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">Number of Cdmg lines <br> excluding enchants/UT/rune</td>
-                        <td><input type="number" v-model="m">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">Number of Atk lines <br> excluding enchants/UT/rune</td>
-                        <td><input type="number" v-model="n">
-                        </td>
-                    </tr>
                     <tr>
                         <td class="">Choose your class</td>
                         <td class="btn-group">
@@ -245,6 +195,14 @@
                             <input type="radio" name="cl" v-model="cl" value="5" id="me"><label for="me" class=""><img src="images/20px-MechanicsIcon.png" alt="Mechanic"></label>
                             <input type="radio" name="cl" v-model="cl" value="6" id="wi"><label for="wi" class=""><img src="images/20px-WizardsIcon.png" alt="Wizard"></label>
                             <input type="radio" name="cl" v-model="cl" value="7" id="pr"><label for="pr" class="last"><img src="images/20px-PriestsIcon.png" alt="Priest"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Gear tier</td>
+                        <td class="btn-group">
+                            <input type="radio" name="tier" v-model="tier" value="6" id="f6"><label for="f6" class="first">6</label>
+                            <input type="radio" name="tier" v-model="tier" value="7" id="f7"><label for="f7" class="">7</label>
+                            <input type="radio" name="tier" v-model="tier" value="8" id="f8"><label for="f8" class="last">8</label>
                         </td>
                     </tr>
                     <tr>
@@ -266,32 +224,94 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="">%Atk from runes/enchants/UT</td>
+                        <td class="">Number of atk lines (in main gear)</td>
+                        <td><input type="number" v-model="n">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Number of cdmg lines (in main gear)</td>
+                        <td><input type="number" v-model="m">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">% Atk <br> Runes + Enchant options + UT options</td>
                         <td><input type="number" v-model="R1"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">%Cdmg from runes/enchants/UT</td>
+                        <td class="">Crit dmg <br> Runes + Enchant options + UT options</td>
                         <td><input type="number" v-model="R2"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">%Atk buff from perks + skill + artifact (excluding masks)</td>
+                        <td class="">Perks</td>
+                        <td class="btn-group">
+                            <!-- common -->
+                            <input type="checkbox" id="t1" value="" v-model="perk1"><label for="t1" class="one"><img src="images/t1atk.jpg" alt="Knight"></label><br><br>
+                            <!-- warrior -->
+                            <div v-if="cl == 2">
+                                <input type="checkbox" id="wa1" value="wa1" v-model="perk2"><label for="wa1" class="first"><img src="images/as2.jpg" alt="Opportune Strike"></label>
+                                <input type="checkbox" id="wa2" value="wa2" v-model="perk2"><label for="wa2" class=""><img src="images/wa2.jpg" alt="Warlike"></label>
+                                <input type="checkbox" id="wa3" value="wa3" v-model="perk2"><label for="wa3" class="last"><img src="images/wa3.jpg" alt="Offensive Guard"></label><br><br>
+                                <span v-if="perk2.includes('wa2')">Number of enemies: <input type="number" v-model="wa2"><br></span>
+                                <span v-if="perk2.includes('wa3')">Flat attack from def: <input type="number" v-model="wa3"><br></span>
+                            </div>
+                            <!-- assassin -->
+                            <div v-if="cl == 4">
+                                <input type="checkbox" id="as1" value="as1" v-model="perk2"><label for="as1" class="first"><img src="images/as1.jpg" alt="Target Weakness"></label>
+                                <input type="checkbox" id="as2" value="as2" v-model="perk2"><label for="as2" class="last"><img src="images/as2.jpg" alt="Opportune Strike"></label><br><br>
+                            </div>
+                            <!-- archer -->
+                            <div v-if="cl == 3">
+                                <input type="checkbox" id="ar1" value="ar1" v-model="perk2"><label for="ar1" class="first"><img src="images/ar1.jpg" alt="Precision Shot"></label>
+                                <input type="checkbox" id="ar2" value="ar2" v-model="perk2"><label for="ar2" class="last"><img src="images/as2.jpg" alt="Opportune Strike"></label><br><br>
+                            </div>
+                            <!-- mechanic -->
+                            <div v-if="cl == 5">
+                                <input type="checkbox" id="me1" value="me1" v-model="perk2"><label for="me1" class="one"><img src="images/as1.jpg" alt="Target Weakness"></label><br><br>
+                            </div>
+                            <!-- wizard -->
+                            <div v-if="cl == 6">
+                                <input type="checkbox" id="wi1" value="wi1" v-model="perk2"><label for="wi1" class="first"><img src="images/wi1.jpg" alt="Moral Rise"></label>
+                                <input type="checkbox" id="wi2" value="wi2" v-model="perk2"><label for="wi2" class="last"><img src="images/wi2.jpg" alt="Circuit Burst"></label><br><br>
+                            </div>
+                            <input type="checkbox" id="t5" value="" v-model="perk5"><label for="t5" class="one"><img src="images/t5l.jpg" alt="T5L"></label><br><br>
+                            
+                            <span v-if="perk5">Additional T5 Light effect<br>
+                                Atk: <input type="number" v-model="perk5a"> % <br>
+                                Cdmg: <input type="number" v-model="perk5c"> %
+                            </span>
+                            
+                            <br><input type="checkbox" id="other" value="" v-model="other"><label for="other" class="one">More?</label><br><br>
+                            <span v-if="other">
+                                Other perks with atk%: <input type="number" v-model="operka"> % <br>
+                                Other perks with cdmg%: <input type="number" v-model="operkc"> %
+                            </span>
+                            </td>
+                        </td>
+                    </tr>
+                    <tr >
+                    </tr>
+                    <tr>
+                        <td class="">% Atk from other sources <br>
+                            Buffs + Skills + Artifacts (excluding masks) + UW effect + UT effect</td>
                         <td><input type="number" v-model="ATK"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Crit Dmg from buffs + perks + artifact</td>
+                        <td class="">Crit Dmg from other sources <br>
+                            Buffs + Skills + Artifacts (excluding masks) + UW effect + UT effect</td>
                         <td><input type="number" v-model="Cd"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Flat Attack Buff <br>(from skills, after skill books effect)</td>
+                        <td class="">Flat Attack Buff <br>
+                            Buffs + Skills + Artifacts (excluding masks) + UW effect + UT effect</td>
                         <td><input type="number" v-model="Fa">
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Attack Type Modifier <br>Attack Type Modifier = Real damage observed / current calculated value</td>
+                        <td class="">Attack Type Modifier <br>Calibrate on first run using this formula <code>Attack Type Modifier = Real damage observed / current Final damage value </code></td>
                         <td><input type="number" v-model="T"> %
                         </td>
                     </tr>
@@ -300,12 +320,22 @@
                         <td>Result</td>
                         <td>
                             Number of atk lines: <code>{{n}}</code> <br>
-                            Number of crit damage lines: <code>{{m}}</code> <br>
-                            Total Atk boost from gears and runes: <code>{{ Math.round(n*b*100 + Number(R1)) }}%</code> <br>
-                            Total Crit Damage (include default 200% crit damage multiplier): <code>{{ Math.round(Number(BCd) + m*a*100) }}%</code> <br>
-                            Atk value seen in stat page: <code>{{ Math.round(OA*(n*b*100 + Number(R1) + Number(100))/100) }}</code> <br>
-                            Cdmg value seen in stat page: <code>{{ Math.round(Number(BCd) - Cd - 200 + m*a*100)}}%</code> <br>
-                            Final damage value: <code>{{f}}</code> <br>
+                            Number of crit damage lines: <code>{{m}}</code> <br><br>
+
+                            <strong>Perk/skill/buff/artifact</strong> <br>
+                            Additional % Atk: <code>{{ Math.round(BATK) - 100 }}%</code> <br>
+                            Crit Damage: <code>{{ Math.round(Number(Cd) + Number(perkc) + Number(operkc)) }}%</code> <br>
+                            Flat Attack boost: <code>{{ BFa }}</code><br><br>
+
+                            <strong>Stat page value</strong> <br>
+                            Atk: <code>{{ Math.round(OA*(n*b + Number(R1)/100 + Number(1))) }}</code> <br>
+                            Cdmg: <code>{{ Math.round(BCd-Cd-200-perkc-operkc + m*a*100)}}%</code> <br><br>
+
+                            Total Atk Modifier: <code>{{ Math.round(OA*(n*b + Number(R1)/100 + Number(1))) }} x {{ BATK }}% + {{ BFa }} = 
+                                {{ Math.round(OA*(n*b + Number(R1)/100 + Number(1))) * BATK/100 + Number(BFa) }}
+                            </code> <br>
+                            Total Crit Damage (include default 200% crit damage multiplier): <code>{{ Math.round(Number(BCd) + m*a*100) }}%</code> <br><br>
+                            <strong>Final damage value:</strong> <code>{{f}}</code> <br>
                         </td>
                     </tr>
                     <tr><td></td>
@@ -329,16 +359,26 @@
         var app = new Vue({
             el: '#app',
             data: {
+                perk1: false,
+                perk5: false,
+                wa2: 0,
+                wa3: 0,
+                other: false,
+                perk5a: 0,
+                perk5c: 0,
+                operka: 0,
+                operkc: 0,
+                perk2: [],
                 tier: 8,
-                m: 0,
                 n: 0,
+                m: 0,
                 star: 0,
                 cl: 1,
                 ear: 'y',
                 R1: 0,
                 R2: 0,
                 ATK: 0,
-                T: 82.07885,
+                T: 100,
                 Cd: 0,
                 Fa: 0
             },
@@ -500,8 +540,60 @@
                 A: function() {
                     return (this.T/100*this.OA*this.BATK/100)
                 },
+                BFa: function(){
+                    if (this.cl == 2 && this.perk2.includes("wa3")){
+                        x = Number(this.Fa) + Number(this.wa3)
+                    } else {
+                        x = this.Fa
+                    }
+                    return x
+                },
+                perka: function(){
+                    x = 0
+                    if (this.perk1){
+                        x = Number(x) + Number(30)
+                    }
+                    if (this.perk5){
+                        x = Number(x) + Number(15) + Number(this.perk5a)
+                    }
+                    if (this.cl == 2 && this.perk2.includes("wa2")){
+                        x = Number(x) + Number(this.wa2)
+                    }
+                    if (this.cl == 4 && this.perk2.includes("as1")){
+                        x = Number(x) + Number(20)
+                    }
+                    if (this.cl == 3 && this.perk2.includes("ar1")){
+                        x = Number(x) + Number(20)
+                    }
+                    if (this.cl == 5 && this.perk2.includes("me1")){
+                        x = Number(x) + Number(20)
+                    }
+                    if (this.cl == 6 && this.perk2.includes("wi1")){
+                        x = Number(x) + Number(15)
+                    }
+                    if (this.cl == 6 && this.perk2.includes("wi2")){
+                        x = Number(x) + Number(40)
+                    }
+                    return x
+                },
+                perkc: function(){
+                    x = 0
+                    if (this.perk5){
+                        x = Number(x) + Number(this.perk5c)
+                    }
+                    if (this.cl == 2 && this.perk2.includes("wa1")){
+                        x = Number(x) + Number(30)
+                    }
+                    if (this.cl == 4 && this.perk2.includes("as2")){
+                        x = Number(x) + Number(30)
+                    }
+                    if (this.cl == 3 && this.perk2.includes("ar2")){
+                        x = Number(x) + Number(30)
+                    }
+                    return x
+                },
                 BATK: function(){
-                    return 100 + Number(this.ATK)
+                    return 100 + Number(this.ATK) + Number(this.perka) + Number(this.operka)
                 },
                 BCd: function() {
                     if (this.cl == 4){
@@ -511,10 +603,10 @@
                     } else {
                         x = 0
                     }
-                    return 200 + Number(this.Cd) + Number(this.R2) + Number(x)
+                    return 200 + Number(this.Cd) + Number(this.R2) + Number(x) + Number(this.perkc) + Number(this.operkc)
                 },
                 f: function() {
-                    return Math.round((this.BCd/100 + 1 + this.a*this.m)*(this.A + this.A*this.R1/100 + this.b*this.A*this.n + this.T/100*this.Fa))
+                    return Math.round((this.BCd/100 + this.a*this.m)*(this.A + this.A*this.R1/100 + this.b*this.A*this.n + this.T/100*this.BFa))
                 }
             }
         })
