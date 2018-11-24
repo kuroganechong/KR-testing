@@ -164,6 +164,13 @@
         .btn-group label:hover {
             box-shadow: 1px 2px 3px 0px #808080;
         }
+
+        .result{
+            background-color: yellow;
+            color: red;
+            font-size: 150%;
+        }
+        code { display: block; white-space: normal; }
     </style>
 
 </head>
@@ -177,13 +184,23 @@
     <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="container" id="app">
-        <div class="row">
+        <div class="">
             <h4>Atk/Cdmg optimize</h4>
-            <h6>Calculates the optimal number of atk/cdmg lines on your gear. <br> 
+            <h6>Calculates the optimal number of atk/cdmg lines on your gear. Does not include effects of attack speed and pen, but the general guideline for these 2 stats is to at least reach the soft cap.
+                <br> 
                 <code>Damage = [(Stat-menu-atk x gear-atk% x perk-&-skill-%atk-buff) + flat-atk-buff] x (2 + base-cdmg + cdmg-buff + gear-cdmg) x atk-type</code> <br>
                 Since it doesn't calculate penetration, it is only accurate for 0 def enemies such as training dummy for now, but generally it optimises damage regardless of enemies def value.
             </h6>
             <table class="u-full-width" id="calc">
+                <thead>
+                    <tr>
+                        <th>Result</th>
+                        <th>
+                            <span class="result">Number of atk lines: <code>{{n}}</code> <br>
+                            Number of crit damage lines: <code>{{m}}</code></span>
+                        </th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
                         <td class="">Choose your class</td>
@@ -224,17 +241,18 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Number of Gear Lines available <br>(for atk/cdmg only)</td>
+                        <td class="">How many gear lines you want to allocate for atk/cdmg? <br>
+                            <small>eg. say you have 16 lines total, and you need 3 lines for atk spd and 1 line for lifesteal, so you have 12 lines for atk/cdmg</small></td>
                         <td><input type="number" v-model="M">
                         </td>
                     </tr>
                     <tr>
-                        <td class="">% Atk <br> Runes + Enchant options + UT options</td>
+                        <td class="">% Atk <br> you get from Runes + Enchant options + UT options</td>
                         <td><input type="number" v-model="R1"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Crit dmg <br> Runes + Enchant options + UT options</td>
+                        <td class="">Crit dmg <br> you get from Runes + Enchant options + UT options</td>
                         <td><input type="number" v-model="R2"> %
                         </td>
                     </tr>
@@ -307,16 +325,14 @@
                     </tr>
                     <tr>
                         <td class="">Attack Type Modifier <br>Calibrate on first run using this formula <code>Attack Type Modifier = Real damage observed / current Final damage value </code></td>
-                        <td><input type="number" v-model="T"> %
+                        <td><input type="number" v-model="T"> %<br>
+                            <strong>Final damage value:</strong> <code>{{f}}</code> <br>
                         </td>
                     </tr>
 
                     <tr>
-                        <td>Result</td>
+                        <td>Other details</td>
                         <td>
-                            Number of atk lines: <code>{{n}}</code> <br>
-                            Number of crit damage lines: <code>{{m}}</code> <br><br>
-
                             <strong>Perk/skill/buff/artifact</strong> <br>
                             Additional % Atk: <code>{{ Math.round(BATK) - 100 }}%</code> <br>
                             Crit Damage: <code>{{ Math.round(Number(Cd) + Number(perkc) + Number(operkc)) }}%</code> <br>
@@ -338,9 +354,6 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-
-        <div class="row">
         </div>
 
         <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
