@@ -1,44 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <!-- Basic Page Needs
-–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <meta charset="utf-8">
-    <title>Kiseki - Atk/Cdmg Optimize</title>
-    <meta name="description" content="Atk/Cdmg Optimize">
-    <meta name="author" content="sagiri">
-
-    <!-- Mobile Specific Metas
-–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- FONT
-–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,600" rel="stylesheet">
-
-    <!-- CSS
-–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-
-    <!-- Favicon
-–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-
-    <!-- Vue JS
-–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="https://unpkg.com/vue"></script>
-</head>
-<body>
-    <div id="app">
-        {{ hero.name }}
-    </div>
-</body>
-
-<script>
-var hero = {
+{
   "name": "Kasel",
   "subtitle": "Warrior of the Holy Sword",
   "description": "The Chosen Warrior of the Holy Sword Aea, the sword that saved the world once before. He can push back enemies and enhance himself with the power of this holy sword.",
@@ -170,11 +130,3 @@ var hero = {
     "dark": "Upon attacking, attack 1 extra time dealing 40% of ATK as DMG."
   }
 }
-
-var app = new Vue({
-    el: '#app',
-    data: {
-        hero: hero
-    }
-})
-</script>
