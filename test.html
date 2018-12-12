@@ -1,0 +1,62 @@
+<script src="https://unpkg.com/vue"></script>
+<div id="app">
+    {{ hello }}
+    <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" @clicked="onClickChild(skill.data)"></blog-post>
+    This is in parent: {{ print }}
+</div>
+
+<script>
+    var post = Vue.component('blog-post', {
+        props: ['post'],
+        data: function () {
+            return { c: 0 }
+        },
+        template: '<div><div v-for="skill in post.data" v-bind:key="skill"><span v-for="s in skill" v-bind:key="s"><input type="checkbox" v-on:click="onClick(skill.s)" value="">This is in component: {{ c }} and key is {{ s }} data is {{ skill.s }}</span></div></div>',
+        methods: {
+            onClick(data) {
+                this.$emit('clicked', data)
+                return this.c++
+            }
+        }
+    })
+
+    var skill = {
+        "s1": {
+            "1": 10,
+            "2": 20
+        },
+        "s2": {
+            "1": 15,
+            "2": 25
+        }
+    }
+
+    var skill2 = {
+        "s1": {
+            "1": 40,
+            "2": 50
+        },
+        "s2": {
+            "1": 45,
+            "2": 55
+        }
+    }
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            hello: 'Hello world',
+            print: "empty",
+            posts: [
+                { id: 1, data: skill },
+                { id: 2, data: skill2 }
+            ]
+        },
+        components: { post: post },
+        methods: {
+            onClickChild(data) {
+                this.print = data
+            }
+        }
+    })
+</script>

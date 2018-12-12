@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Kiseki</title>
+    <meta name="description" content="">
+    <meta name="author" content="sagiri">
+
+    <!-- Mobile Specific Metas
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,600" rel="stylesheet">
+
+    <!-- CSS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+
+    <!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Vue JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://unpkg.com/vue"></script>
+
+
+</head>
+
+<body>
+    <div class="nav-bar">
+        <ul class="ul">
+        </ul>
+    </div>
+    <!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container" id="app">
+        <div class="row" id="hero-container">
+            <div class="three columns">Hero</div>
+            <div class="nine columns">
+                <select class="u-full-width" id="hero" v-model="cl">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" id="tier-container">
+            <div class="three columns">Gear tier</div>
+            <div class="nine columns">
+                <select class="u-full-width" id="tier" v-model="tier">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" id="uw-container">
+            <div class="three columns">UW</div>
+            <div class="five columns">
+                <label for="uw">Stars</label>
+                <select class="u-full-width" id="uw" v-model="star">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="four columns">
+                <label>Runes</label>
+                Atk: <input id="uw_rune_1" type="number" v-model="uw_rune_1">% <br>
+                CDmg: <input id="uw_rune_2" type="number" v-model="uw_rune_2">%
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="armor-container">
+            <div class="three columns">Armor</div>
+            <div class="three columns">
+                <label for="armor_line">No. of ATK/CDMG lines</label>
+                <select class="u-full-width" id="armor_line" v-model="armor_line">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="three columns">
+                <label for="armor-enc">Enchant</label>
+                Atk: <input id="armor_enc_1" type="number" v-model="armor_enc_1">% <br>
+                CDmg: <input id="armor_enc_2" type="number" v-model="armor_enc_2">%
+            </div>
+            <div class="three columns">
+                <label for="armor_rune_1">Rune</label>
+                <select class="u-full-width" id="armor_rune_1" v-model="armor_rune_1">
+                    <option value="-">-</option>
+                    <option value="1">11% ATK</option>
+                    <option value="2">22% CDMG</option>
+                    <option value="3">40% CDMG</option>
+                    <option value="4">30% CDMG</option>
+                    <option value="others">others</option>
+                </select>
+                <select class="u-full-width" id="armor_rune_2" v-model="armor_rune_2">
+                    <option value="-">-</option>
+                    <option value="1">11% ATK</option>
+                    <option value="2">22% CDMG</option>
+                    <option value="3">40% CDMG</option>
+                    <option value="4">30% CDMG</option>
+                    <option value="others">others</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="subarmor-container">
+            <div class="three columns">Subarmor</div>
+            <div class="three columns">
+                <label for="subarmor_line">No. of ATK/CDMG lines</label>
+                <select class="u-full-width" id="subarmor_line" v-model="subarmor_line">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="three columns">
+                <label>Enchant</label>
+                Atk: <input id="subarmor_enc_1" type="number" v-model="subarmor_enc_1">% <br>
+                CDmg: <input id="subarmor_enc_2" type="number" v-model="subarmor_enc_2">%
+            </div>
+            <div class="three columns">
+                <label for="subarmor_rune_1">Rune</label>
+                <select class="u-full-width" id="subarmor_rune_1" v-model="subarmor_rune_1">
+                    <option value="-">-</option>
+                    <option value="1">11% ATK</option>
+                    <option value="2">22% CDMG</option>
+                    <option value="others">others</option>
+                </select>
+                <select class="u-full-width" id="subarmor_rune_2" v-model="subarmor_rune_2">
+                    <option value="-">-</option>
+                    <option value="1">11% ATK</option>
+                    <option value="2">22% CDMG</option>
+                    <option value="others">others</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="accessory-container">
+            <div class="three columns">
+                Accessory
+                <select class="u-full-width" id="ear" v-model="ear">
+                    <option value="1">Earring</option>
+                    <option value="2">Non-earring</option>
+                </select>
+            </div>
+            <div class="three columns">
+                <label for="acc_line">No. of ATK/CDMG lines</label>
+                <select class="u-full-width" id="acc_line" v-model="acc_line">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="three columns">
+                <label>Enchant</label>
+                Atk: <input id="acc_enc_1" type="number" v-model="acc_enc_1">% <br>
+                CDmg: <input id="acc_enc_2" type="number" v-model="acc_enc_2">%
+            </div>
+            <div class="three columns">
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="orb-container">
+            <div class="three columns">Orb</div>
+            <div class="three columns">
+                <label for="orb_line">No. of ATK/CDMG lines</label>
+                <select class="u-full-width" id="orb_line" v-model="orb_line">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="three columns">
+                <label>Enchant</label>
+                Atk: <input id="orb_enc_1" type="number" v-model="orb_enc_1">% <br>
+                CDmg: <input id="orb_enc_2" type="number" v-model="orb_enc_2">%
+            </div>
+            <div class="three columns">
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="treasure-container">
+            <div class="three columns">
+                Treasure
+                <select class="u-full-width" id="ut" v-model="ut">
+                    <option value="1">Active UT1</option>
+                    <option value="2">Active UT2</option>
+                    <option value="3">Active UT3</option>
+                </select>
+            </div>
+            <div class="three columns">
+                <label>UT1</label>
+                Atk: <input id="ut1_1" type="number" v-model="ut1_1">% <br>
+                CDmg: <input id="ut1_2" type="number" v-model="ut1_2">%
+            </div>
+            <div class="three columns">
+                <label>UT2</label>
+                Atk: <input id="ut2_1" type="number" v-model="ut2_1">% <br>
+                CDmg: <input id="ut2_2" type="number" v-model="ut2_2">%
+            </div>
+            <div class="three columns">
+                <label>UT3</label>
+                Atk: <input id="ut3_1" type="number" v-model="ut3_1">% <br>
+                CDmg: <input id="ut3_2" type="number" v-model="ut3_2">%
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="skill-container">
+            <div class="three columns">
+                Perks
+            </div>
+            <div class="nine columns">
+                <skill v-for="post in posts" v-bind:key="post.id"></skill>
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="artifact-container">
+            <div class="three columns">
+                Artifact
+            </div>
+            <div class="three columns">
+                <label for="art_1">Atk</label>
+                <input id="art_1" type="number" v-model="art_1">%
+            </div>
+            <div class="three columns">
+                <label for="art_2">CDmg</label>
+                <input id="art_2" type="number" v-model="art_2">%
+            </div>
+            <div class="three columns">
+                <label for="art_3">Creature Mask</label>
+                <input id="art_3" type="number" v-model="art_3">%
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="scale-container">
+            <label for="scale">Scaling</label>
+            <input id="scale" type="number" v-model="scale">% <br>
+            Add atk: <input id="addatk" type="number" v-model="addatk">%<br>
+            Add cdmg: <input id="addcdmg" type="number" v-model="addcdmg">%<br>
+            Add Flat atk: <input id="Fa" type="number" v-model="Fa">%
+        </div>
+        <hr>
+        <div class="row" id="result-container">
+            Result: {{ f }}
+        </div>
+        <hr>
+
+        <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
+
+        <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
+    </div>
+
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script>
+        var skill = {
+            "s1": {
+                "light": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                },
+                "dark": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                },
+                "none": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                }
+            },
+            "s2": {
+                "light": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                },
+                "dark": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                },
+                "none": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                }
+            },
+            "s3": {
+                "light": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                },
+                "dark": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                },
+                "none": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                }
+            },
+            "s4": {
+                "light": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                },
+                "dark": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                },
+                "none": {
+                    "ut": {
+                        "atk": ["0", "10", "20", "30", "40", "50"],
+                        "fa": ["0", "10", "20", "30", "40", "50"],
+                        "cdmg": ["0", "10", "20", "30", "40", "50"]
+                    },
+                    "nout": {
+                        "atk": 10,
+                        "fa": 10,
+                        "cdmg": 10
+                    }
+                }
+            }
+        }
+
+        var test = [
+            { id: 1, data: skill },
+            { id: 2, data: skill },
+            { id: 3, data: skill }
+        ]
+
+        function selectrune(data, mode) {
+            switch (data) {
+                case '1':
+                    // 11 atk
+                    if (mode == 1) {
+                        x = 11
+                    }
+                    break;
+                case '2':
+                    // 22 cdmg
+                    if (mode == 2) {
+                        x = 22
+                    }
+                    break;
+                case '3':
+                    // 40 cdmg
+                    if (mode == 2) {
+                        x = 40
+                    }
+                    break;
+                case '4':
+                    // 30 cdmg
+                    if (mode == 2) {
+                        x = 30
+                    }
+                    break;
+                default:
+                    // others
+                    x = 0
+                    break;
+            }
+            return x
+        }
+
+
+        var component1 = Vue.component("skill", {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                onClickButton(event) {
+                    this.$emit('clicked', 'someValue')
+                }
+            },
+            template: '<div><input type="checkbox" v-on:click="count++"><span class="label-body">{{testvar}}</span></div>'
+        })
+
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                posts: test,
+                testvar: 0,
+                cl: '1',
+                tier: '8',
+                star: '0',
+                uw_rune_1: 0,
+                uw_rune_2: 0,
+                armor_line: '0',
+                armor_enc_1: 0,
+                armor_enc_2: 0,
+                armor_rune_1: '-',
+                armor_rune_2: '-',
+                subarmor_line: '0',
+                subarmor_enc_1: 0,
+                subarmor_enc_2: 0,
+                subarmor_rune_1: '-',
+                subarmor_rune_2: '-',
+                ear: '1',
+                acc_line: '0',
+                acc_enc_1: 0,
+                acc_enc_2: 0,
+                orb_line: '0',
+                orb_enc_1: 0,
+                orb_enc_2: 0,
+                ut: '1',
+                ut1_1: 0,
+                ut1_2: 0,
+                ut2_1: 0,
+                ut2_2: 0,
+                ut3_1: 0,
+                ut3_2: 0,
+                art_1: 0,
+                art_2: 0,
+                art_3: 0,
+                scale: 0,
+                addatk: 0,
+                addcdmg: 0,
+                Fa: 0
+            },
+            computed: {
+                earring: function () {
+                    if (this.tier == 8) {
+                        return 23702
+                    } else if (this.tier == 7) {
+                        return 18926
+                    } else {
+                        return 13291
+                    }
+                },
+                base: function () {
+                    if (this.cl == 1) {
+                        return 17632
+                    } else if (this.cl == 2) {
+                        return 20032
+                    } else if (this.cl == 3) {
+                        return 24824
+                    } else if (this.cl == 4) {
+                        return 21992
+                    } else if (this.cl == 5) {
+                        return 22648
+                    } else if (this.cl == 6) {
+                        return 26128
+                    } else {
+                        return 20688
+                    }
+                },
+                uw: function () {
+                    if (this.cl == 1) {
+                        if (this.star == 0) {
+                            return 38484
+                        } else if (this.star == 1) {
+                            return 42332
+                        } else if (this.star == 2) {
+                            return 50029
+                        } else if (this.star == 3) {
+                            return 61574
+                        } else if (this.star == 4) {
+                            return 76968
+                        } else {
+                            return 96209
+                        }
+                    } else if (this.cl == 2) {
+                        if (this.star == 0) {
+                            return 43615
+                        } else if (this.star == 1) {
+                            return 47976
+                        } else if (this.star == 2) {
+                            return 56699
+                        } else if (this.star == 3) {
+                            return 69784
+                        } else if (this.star == 4) {
+                            return 87230
+                        } else {
+                            return 109037
+                        }
+                    } else if (this.cl == 3) {
+                        if (this.star == 0) {
+                            return 53976
+                        } else if (this.star == 1) {
+                            return 59373
+                        } else if (this.star == 2) {
+                            return 70169
+                        } else if (this.star == 3) {
+                            return 86362
+                        } else if (this.star == 4) {
+                            return 107952
+                        } else {
+                            return 134940
+                        }
+                    } else if (this.cl == 4) {
+                        if (this.star == 0) {
+                            return 47957
+                        } else if (this.star == 1) {
+                            return 52752
+                        } else if (this.star == 2) {
+                            return 62344
+                        } else if (this.star == 3) {
+                            return 76731
+                        } else if (this.star == 4) {
+                            return 95914
+                        } else {
+                            return 119892
+                        }
+                    } else if (this.cl == 5) {
+                        if (this.star == 0) {
+                            return 49239
+                        } else if (this.star == 1) {
+                            return 54163
+                        } else if (this.star == 2) {
+                            return 64011
+                        } else if (this.star == 3) {
+                            return 78783
+                        } else if (this.star == 4) {
+                            return 98479
+                        } else {
+                            return 123099
+                        }
+                    } else if (this.cl == 6) {
+                        if (this.star == 0) {
+                            return 50325
+                        } else if (this.star == 1) {
+                            return 55357
+                        } else if (this.star == 2) {
+                            return 65422
+                        } else if (this.star == 3) {
+                            return 80520
+                        } else if (this.star == 4) {
+                            return 100650
+                        } else {
+                            return 125812
+                        }
+                    } else {
+                        if (this.star == 0) {
+                            return 50325
+                        } else if (this.star == 1) {
+                            return 55357
+                        } else if (this.star == 2) {
+                            return 65422
+                        } else if (this.star == 3) {
+                            return 80520
+                        } else if (this.star == 4) {
+                            return 100650
+                        } else {
+                            return 125812
+                        }
+                    }
+                },
+                OA: function () {
+                    // Flat base atk before any mulitplier
+                    result = Number(this.uw) + Number(this.base)
+                    if (this.ear == '1') {
+                        result = Number(result) + Number(this.earring)
+                        return result
+                    } else {
+                        return result
+                    }
+                },
+                a: function () {
+                    if (this.tier == 8) {
+                        return 0.24
+                    } else if (this.tier == 7) {
+                        return 0.22
+                    } else {
+                        return 0.20
+                    }
+                },
+                b: function () {
+                    if (this.tier == 8) {
+                        return 0.12
+                    } else if (this.tier == 7) {
+                        return 0.11
+                    } else {
+                        return 0.10
+                    }
+                },
+                ATK: function () {
+                    // sum of all atk skills + enchant + ut
+                    x = Number(this.addatk) + Number(this.armor_enc_1) + Number(this.subarmor_enc_1) + Number(this.acc_enc_1) + Number(this.orb_enc_1)
+                        + Number(this.ut1_1) + Number(this.ut2_1) + Number(this.ut3_1) + Number(this.art_1)
+                    return x
+                },
+                BATK: function () {
+                    x = Number(100) + Number(this.ATK)
+                    return x
+                },
+                T: function () {
+                    x = Number(100) + Number(this.scale) + Number(this.art_3)
+                    return x
+                },
+                A: function () {
+                    // Simplify the function
+                    return (this.T / 100 * this.OA * this.BATK / 100)
+                },
+                BFa: function () {
+                    // sum of all flat atk buff
+                    x = this.Fa
+                    return x
+                },
+                R2: function () {
+                    // sum of all cdmg runes
+                    x = Number(this.uw_rune_2)
+                        + Number(selectrune(this.armor_rune_1, 2))
+                        + Number(selectrune(this.armor_rune_2, 2))
+                        + Number(selectrune(this.subarmor_rune_1, 2))
+                        + Number(selectrune(this.subarmor_rune_2, 2))
+                    return x
+                },
+                Cd: function () {
+                    // sum of all cdmg skills + enchant + ut
+                    x = Number(this.addcdmg) + Number(this.armor_enc_2) + Number(this.subarmor_enc_2) + Number(this.acc_enc_2) + Number(this.orb_enc_2)
+                        + Number(this.ut1_2) + Number(this.ut2_2) + Number(this.ut3_2) + Number(this.art_2)
+                    return x
+                },
+                BCd: function () {
+                    if (this.cl == 4) {
+                        x = 30
+                    } else if (this.cl == 5) {
+                        x = 50
+                    } else {
+                        x = 0
+                    }
+                    return 200 + Number(this.Cd) + Number(this.R2) + Number(x)
+                },
+                R1: function () {
+                    // sum of all atk runes
+                    x = Number(this.uw_rune_1)
+                        + Number(selectrune(this.armor_rune_1, 1))
+                        + Number(selectrune(this.armor_rune_2, 1))
+                        + Number(selectrune(this.subarmor_rune_1, 1))
+                        + Number(selectrune(this.subarmor_rune_2, 1))
+                    return x
+                },
+                M: function () {
+                    x = Number(this.armor_line) + Number(this.subarmor_line) + Number(this.acc_line) + Number(this.orb_line)
+                    return x
+                },
+                m: function () {
+                    return Math.round(this.BFa / (2 * this.b * this.OA * this.BATK / 100) + this.M / 2 + (1 + this.R1 / 100) / (2 * this.b) - (this.BCd / 100) / (2 * this.a))
+                },
+                n: function () {
+                    return Math.round(this.M - this.m)
+                },
+                f: function () {
+                    return Math.round((this.BCd / 100 + this.a * this.m) * (this.A + this.A * this.R1 / 100 + this.b * this.A * this.n + this.T / 100 * this.BFa))
+                }
+            },
+            components: {
+                skill: component1
+            }
+        })
+    </script>
+</body>
+
+</html>
