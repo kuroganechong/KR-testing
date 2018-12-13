@@ -1,8 +1,7 @@
 <script src="https://unpkg.com/vue"></script>
 <div id="app">
-    {{ hello }}
-    <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" @clicked="onClickChild(skill.data)"></blog-post>
     This is in parent: {{ print }}
+    <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" @clicked="onClickChild"></blog-post>
 </div>
 
 <script>
@@ -11,11 +10,22 @@
         data: function () {
             return { c: 0 }
         },
-        template: '<div><div v-for="skill in post.data" v-bind:key="skill"><span v-for="s in skill" v-bind:key="s"><input type="checkbox" v-on:click="onClick(skill.s)" value="">This is in component: {{ c }} and key is {{ s }} data is {{ skill.s }}</span></div></div>',
+        template: '<div><h4>Hero: {{ post.id }}</h4><h5>Total nodes activated: {{ c }}</h5>\
+        <div v-for="(skill, skillno) in post.data" v-bind:key="skillno + post.id">\
+        <h5>Skill: {{ skillno }}</h5>\
+        <input type="checkbox" v-on:click="onClick(1 + skillno + post.id, skill[1])" value="skill[1]" v-bind:id="1 + skillno + post.id">1: data is {{ skill[1] }}<br>\
+        <input type="checkbox" v-on:click="onClick(2 + skillno + post.id, skill[2])" value="skill[2]" v-bind:id="2 + skillno + post.id">2: data is {{ skill[2] }}\
+        </div>\
+        </div>',
         methods: {
-            onClick(data) {
-                this.$emit('clicked', data)
-                return this.c++
+            onClick: function(id, data) {
+                if(document.getElementById(id).checked){
+                    this.$emit('clicked', data)
+                    return this.c++
+                } else{
+                    this.$emit('clicked', 0 - data)
+                    return this.c--
+                }
             }
         }
     })
@@ -45,8 +55,7 @@
     var app = new Vue({
         el: "#app",
         data: {
-            hello: 'Hello world',
-            print: "empty",
+            print: 0,
             posts: [
                 { id: 1, data: skill },
                 { id: 2, data: skill2 }
@@ -54,8 +63,8 @@
         },
         components: { post: post },
         methods: {
-            onClickChild(data) {
-                this.print = data
+            onClickChild: function(data) {
+                this.print = Number(this.print) + Number(data)
             }
         }
     })
