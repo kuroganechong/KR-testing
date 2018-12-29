@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Members stats</title>
+    <meta name="description" content="Stats for each members of Miracle">
+    <meta name="author" content="sagiri">
+
+    <!-- Mobile Specific Metas
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet">
+
+    <!-- CSS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/skeleton.css">
+
+    <!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+
+    <!-- Vue JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://unpkg.com/vue"></script>
+
+    <style>
+        .ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        
+        .li {
+            float: left;
+        }
+        
+        .li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        /* Change the link color to #111 (black) on hover */
+        
+        .li a:hover {
+            background-color: #111;
+        }
+        
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="nav-bar">
+        <ul class="ul">
+            <li class="li active"><a href="/data/index.html">Knowledge Base</a></li>
+            <li class="li"><a href="../">Back</a></li>
+        </ul>
+    </div>
+    <!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container" id="app">
+        <div class="row">
+            <div class="six columns" style="margin-top:5%">
+                <h4>Ideal Substats</h4>
+            </div>
+        </div>
+
+        <ol>
+            <li>
+                Weapon
+                <ul>
+                    <li>Attack</li>
+                    <li>Attack Speed (Stella, Erwin)</li>
+                    <li>Critical Damage</li>
+                    <li>Critical Rate</li>
+                    <li>Damage on Boss</li>
+                    <li>Penetration</li>
+                </ul>
+            </li>
+            <li>
+                Head
+                <ul>
+                    <li>Attack</li>
+                    <li>Critical Damage</li>
+                    <li>Critical Rate*</li>
+                    <li>HP</li>
+                </ul>
+            </li>
+            <li>
+                Shoulder
+                <ul>
+                    <li>Attack</li>
+                    <li>Attack Speed*</li>
+                    <li>Critical Damage</li>
+                    <li>HP</li>
+                </ul>
+            </li>
+            <li>
+                Body
+                <ul>
+                    <li>Attack</li>
+                    <li>Critical Damage</li>
+                    <li>HP</li>
+                    <li>HP%*</li>
+                </ul>
+            </li>
+            <li>
+                Feet
+                <ul>
+                    <li>Attack</li>
+                    <li>Critical Damage</li>
+                    <li>HP</li>
+                    <li>Move Speed*</li>
+                </ul>
+            </li>
+            <li>
+                Earring
+                <ul>
+                    <li>Attack</li>
+                    <li>Attack Speed</li>
+                    <li>Critical Damage (Only on Lord of Chaos set)</li>
+                    <li>Critical Rate</li>
+                    <li>Damage Reduction from Boss</li>
+                    <li>Move Speed</li>
+                </ul>
+            </li>
+            <li>
+                Pendant
+                <ul>
+                    <li>Attack</li>
+                    <li>Attack Speed</li>
+                    <li>Critical Damage (Only on Lord of Chaos set)</li>
+                    <li>Damage Reduction</li>
+                    <li>Damage Reduction from Boss</li>
+                </ul>
+            </li>
+            <li>
+                Ring
+                <ul>
+                    <li>Attack</li>
+                    <li>Critical Damage</li>
+                    <li>Critical Rate</li>
+                    <li>Damage Reduction from Boss</li>
+                </ul>
+            </li>
+        </ol>
+
+        <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
+
+        <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
+    </div>
+
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Members stats</title>
+    <meta name="description" content="Stats for each members of Miracle">
+    <meta name="author" content="sagiri">
+
+    <!-- Mobile Specific Metas
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet">
+
+    <!-- CSS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/skeleton.css">
+
+    <!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+
+    <!-- Vue JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://unpkg.com/vue"></script>
+
+    <style>
+        .ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        
+        .li {
+            float: left;
+        }
+        
+        .li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        /* Change the link color to #111 (black) on hover */
+        
+        .li a:hover {
+            background-color: #111;
+        }
+        
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="nav-bar">
+        <ul class="ul">
+            <li class="li active"><a href="/data/index.html">Knowledge Base</a></li>
+            <li class="li"><a href="../">Back</a></li>
+        </ul>
+    </div>
+    <!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container" id="app">
+        <div class="row">
+            <div class="six columns" style="margin-top:5%">
+                <h4>Knowledge Base</h4>
+            </div>
+        </div>
+
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Set</th>
+                    <th>Part</th>
+                    <th>Quality</th>
+                    <th>Effect</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BSK</td>
+                    <td>Head</td>
+                    <td>Mega</td>
+                    <td>Attack +5%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Head</td>
+                    <td>Giga</td>
+                    <td>Attack +8%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Head</td>
+                    <td>Tera</td>
+                    <td>Attack +11%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Top</td>
+                    <td>Mega</td>
+                    <td>Critical Rate +3%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Top</td>
+                    <td>Giga</td>
+                    <td>Critical Rate +4%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Top</td>
+                    <td>Tera</td>
+                    <td>Critical Rate +5%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Bottom</td>
+                    <td>Mega</td>
+                    <td>Super Armor Break +8%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Bottom</td>
+                    <td>Giga</td>
+                    <td>Super Armor Break +12%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Bottom</td>
+                    <td>Tera</td>
+                    <td>Super Armor Break +16%</td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Hand</td>
+                    <td>Mega</td>
+                    <td>Attack Speed +3% / Movement Speed +3% </td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Hand</td>
+                    <td>Giga</td>
+                    <td>Attack Speed +5% / Movement Speed +4% </td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Hand</td>
+                    <td>Tera</td>
+                    <td>Attack Speed +6% / Movement Speed +6% </td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Shoe</td>
+                    <td>Mega</td>
+                    <td>Critical Damage +1000 </td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Shoe</td>
+                    <td>Giga</td>
+                    <td>Critical Damage +1350 </td>
+                </tr>
+                <tr>
+                    <td>BSK</td>
+                    <td>Shoe</td>
+                    <td>Tera</td>
+                    <td>Critical Damage +1700 </td>
+                </tr>
+
+                <tr>
+                    <td>SD</td>
+                    <td>Head</td>
+                    <td>Bit</td>
+                    <td>Attack +1% / Evaded Attack Damage 1% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Head</td>
+                    <td>Kilo</td>
+                    <td>Attack +2% / Evaded Attack Damage 2% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Head</td>
+                    <td>Mega</td>
+                    <td>Attack +3% / Evaded Attack Damage 3% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Head</td>
+                    <td>Giga</td>
+                    <td>Attack +4% / Evaded Attack Damage 4% / Penetration +1% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Head</td>
+                    <td>Tera</td>
+                    <td>Attack +5% / Evaded Attack Damage 5% / Penetration +2% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Top</td>
+                    <td>Bit</td>
+                    <td>Defense +5% / HP +4%</td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Top</td>
+                    <td>Kilo</td>
+                    <td>Defense +10% / HP +8% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Top</td>
+                    <td>Mega</td>
+                    <td>Defense +15% / HP +12% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Top</td>
+                    <td>Giga</td>
+                    <td>Defense +20% / HP +16% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Top</td>
+                    <td>Tera</td>
+                    <td>Defense +25% / HP +20% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Bottom</td>
+                    <td>Bit</td>
+                    <td>Evasion +10 / Critical Resistance +1% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Bottom</td>
+                    <td>Kilo</td>
+                    <td>Evasion +20 / Critical Resistance +2% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Bottom</td>
+                    <td>Mega</td>
+                    <td>Evasion +30 / Critical Resistance +3% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Bottom</td>
+                    <td>Giga</td>
+                    <td>Evasion +40 / Critical Resistance +4% / Damage Reduction +4% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Bottom</td>
+                    <td>Tera</td>
+                    <td>Evasion +50 / Critical Resistance +5% / Damage Reduction +5% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Hand</td>
+                    <td>Bit</td>
+                    <td>Stamina +5 / Attack Speed +1% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Hand</td>
+                    <td>Kilo</td>
+                    <td>Stamina +8 / Attack Speed +2% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Hand</td>
+                    <td>Mega</td>
+                    <td>Stamina +11 / Attack Speed +3% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Hand</td>
+                    <td>Giga</td>
+                    <td>Stamina +14 / Attack Speed +4% / Movement Speed +3% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Hand</td>
+                    <td>Tera</td>
+                    <td>Stamina +17 / Attack Speed +5% / Movement Speed +4% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Shoe</td>
+                    <td>Bit</td>
+                    <td>Accuracy +10 / Critical Damage +600 </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Shoe</td>
+                    <td>Kilo</td>
+                    <td>Accuracy +20 / Critical Damage +700</td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Shoe</td>
+                    <td>Mega</td>
+                    <td>Accuracy +30 / Critical Damage +800 </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Shoe</td>
+                    <td>Giga</td>
+                    <td>Accuracy +40 / Critical Damage +900 / Critical Rate +1% </td>
+                </tr>
+                <tr>
+                    <td>SD</td>
+                    <td>Shoe</td>
+                    <td>Tera</td>
+                    <td>Accuracy +50 / Critical Damage +1000 / Critical Rate +2%</td>
+                </tr>
+
+                <tr>
+                    <td>FOT</td>
+                    <td>Head</td>
+                    <td>Bit</td>
+                    <td>Critical Resistance 2% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Head</td>
+                    <td>Kilo</td>
+                    <td>Critical Resistance 4% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Head</td>
+                    <td>Mega</td>
+                    <td>Critical Resistance 6% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Head</td>
+                    <td>Giga</td>
+                    <td>Critical Resistance 8% / Critical Rate 1% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Head</td>
+                    <td>Tera</td>
+                    <td>Critical Resistance 10% / Critical Rate 3% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Top</td>
+                    <td>Bit</td>
+                    <td>HP +2% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Top</td>
+                    <td>Kilo</td>
+                    <td>HP +4% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Top</td>
+                    <td>Mega</td>
+                    <td>HP +6% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Top</td>
+                    <td>Giga</td>
+                    <td>HP +8% / Defense +50</td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Top</td>
+                    <td>Tera</td>
+                    <td>HP +10% / Defense +100 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Bottom</td>
+                    <td>Bit</td>
+                    <td>Defense +75</td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Bottom</td>
+                    <td>Kilo</td>
+                    <td>Defense +150 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Bottom</td>
+                    <td>Mega</td>
+                    <td>Defense +300 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Bottom</td>
+                    <td>Giga</td>
+                    <td>Defense +500 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Bottom</td>
+                    <td>Tera</td>
+                    <td>Defense +750 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Hand</td>
+                    <td>Bit</td>
+                    <td>Defense +25 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Hand</td>
+                    <td>Kilo</td>
+                    <td>Defense +50 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Hand</td>
+                    <td>Mega</td>
+                    <td>Defense +100 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Hand</td>
+                    <td>Giga</td>
+                    <td>Defense +250 / HP +3% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Hand</td>
+                    <td>Tera</td>
+                    <td>Defense +500 / HP +5% </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Shoe</td>
+                    <td>Bit</td>
+                    <td>HP +500 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Shoe</td>
+                    <td>Kilo</td>
+                    <td>HP +1200</td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Shoe</td>
+                    <td>Mega</td>
+                    <td>HP +2500 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Shoe</td>
+                    <td>Giga</td>
+                    <td>HP +5000 </td>
+                </tr>
+                <tr>
+                    <td>FOT</td>
+                    <td>Shoe</td>
+                    <td>Tera</td>
+                    <td>HP +8000</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
+
+        <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
+    </div>
+
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>
