@@ -231,26 +231,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Choose your class</td>
-                        <td class="btn-group">
-                            <input type="radio" name="cl" v-model="cl" value="1" id="kn"><label for="kn" class="first"><img src="images/20px-KnightsIcon.png" alt="Knight"></label>
-                            <input type="radio" name="cl" v-model="cl" value="2" id="wa"><label for="wa" class=""><img src="images/20px-WarriorsIcon.png" alt="Warrior"></label>
-                            <input type="radio" name="cl" v-model="cl" value="4" id="as"><label for="as" class=""><img src="images/20px-AssassinsIcon.png" alt="Assassin"></label>
-                            <input type="radio" name="cl" v-model="cl" value="3" id="ar"><label for="ar" class=""><img src="images/20px-ArchersIcon.png" alt="Archer"></label>
-                            <input type="radio" name="cl" v-model="cl" value="5" id="me"><label for="me" class=""><img src="images/20px-MechanicsIcon.png" alt="Mechanic"></label>
-                            <input type="radio" name="cl" v-model="cl" value="6" id="wi"><label for="wi" class=""><img src="images/20px-WizardsIcon.png" alt="Wizard"></label>
-                            <input type="radio" name="cl" v-model="cl" value="7" id="pr"><label for="pr" class="last"><img src="images/20px-PriestsIcon.png" alt="Priest"></label>
+                        <td class="">UW raw attack</td>
+                        <td><input type="number" v-model="uw">
                         </td>
                     </tr>
                     <tr>
-                        <td class="">UW stars</td>
-                        <td class="btn-group">
-                            <input type="radio" name="star" v-model="star" value="0" id="0s"><label for="0s" class="first">0</label>
-                            <input type="radio" name="star" v-model="star" value="1" id="1s"><label for="1s" class="">1</label>
-                            <input type="radio" name="star" v-model="star" value="2" id="2s"><label for="2s" class="">2</label>
-                            <input type="radio" name="star" v-model="star" value="3" id="3s"><label for="3s" class="">3</label>
-                            <input type="radio" name="star" v-model="star" value="4" id="4s"><label for="4s" class="">4</label>
-                            <input type="radio" name="star" v-model="star" value="5" id="5s"><label for="5s" class="last">5</label>
+                        <td class="">Base damage without gears</td>
+                        <td><input type="number" v-model="base">
                         </td>
                     </tr>
                     <tr>
@@ -261,22 +248,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="">%Atk from runes/enchants/UT</td>
-                        <td><input type="number" v-model="R1"> %
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">%Cdmg from runes/enchants/UT</td>
-                        <td><input type="number" v-model="R2"> %
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">%Atk buff from perks + skill + artifact (excluding masks)</td>
+                        <td class="">%Atk buff from Perk/Skill/Artifact (excluding masks) <br>(after skill books effect)</td>
                         <td><input type="number" v-model="ATK"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Crit Dmg from buffs + perks + artifact</td>
+                        <td class="">Crit Dmg not from gear <br>(Base value seen in stat page + buffs + Perks)</td>
                         <td><input type="number" v-model="Cd"> %
                         </td>
                     </tr>
@@ -296,10 +273,8 @@
                         <td>
                             Number of atk lines: <code>{{n}}</code> <br>
                             Number of crit damage lines: <code>{{m}}</code> <br>
-                            Total Atk boost from gears and runes: <code>{{ Math.round(n*b*100 + Number(R1)) }}%</code> <br>
-                            Total Crit Damage (include default 200% crit damage multiplier): <code>{{ Math.round(BCd + m*a*100) }}%</code> <br>
-                            Atk value seen in stat page: <code>{{ Math.round(OA*(n*b*100 + Number(R1) + Number(100))/100) }}</code> <br>
-                            Cmdg value seen in stat page: <code>{{ Math.round(Number(Cd) + Number(R2) + m*a*100)}}%</code> <br>
+                            Total Atk boost from gears: <code>{{Math.round(n*b*100)}}%</code> <br>
+                            Total Crit Damage (include default 200% crit damage multiplier): <code>{{Math.round(BCd + m*a*100)}}%</code> <br>
                             Final damage value: <code>{{f}}</code> <br>
                         </td>
                     </tr>
@@ -326,11 +301,9 @@
             data: {
                 tier: 8,
                 M: 16,
-                star: 0,
-                cl: 1,
+                uw: 100,
+                base: 100,
                 ear: 'y',
-                R1: 0,
-                R2: 0,
                 ATK: 0,
                 T: 100,
                 Cd: 0,
@@ -339,129 +312,11 @@
             computed: {
                 earring: function(){
                     if(this.tier == 8){
-                        return 23702
+                        return 25000
                     } else if(this.tier == 7){
-                        return 18926
+                        return 18000
                     } else {
-                        return 13291
-                    }
-                },
-                base: function(){
-                    if(this.cl == 1){
-                        return 17632
-                    } else if(this.cl == 2){
-                        return 20032
-                    } else if(this.cl == 3){
-                        return 24824
-                    } else if(this.cl == 4){
-                        return 21992
-                    } else if(this.cl == 5){
-                        return 22648
-                    } else if(this.cl == 6){
-                        return 26128
-                    } else {
-                        return 20688
-                    }
-                },
-                uw: function(){
-                    if(this.cl == 1){
-                        if(this.star == 0){
-                            return 38484
-                        } else if(this.star == 1){
-                            return 42332
-                        } else if(this.star == 2){
-                            return 50029
-                        } else if(this.star == 3){
-                            return 61574
-                        } else if(this.star == 4){
-                            return 76968
-                        } else {
-                            return 96209
-                        }
-                    } else if(this.cl == 2){
-                        if(this.star == 0){
-                            return 43615
-                        } else if(this.star == 1){
-                            return 47976
-                        } else if(this.star == 2){
-                            return 56699
-                        } else if(this.star == 3){
-                            return 69784
-                        } else if(this.star == 4){
-                            return 87230
-                        } else {
-                            return 109037
-                        }
-                    } else if(this.cl == 3){
-                        if(this.star == 0){
-                            return 53976
-                        } else if(this.star == 1){
-                            return 59373
-                        } else if(this.star == 2){
-                            return 70169
-                        } else if(this.star == 3){
-                            return 86362
-                        } else if(this.star == 4){
-                            return 107952
-                        } else {
-                            return 134940
-                        }
-                    } else if(this.cl == 4){
-                        if(this.star == 0){
-                            return 47957
-                        } else if(this.star == 1){
-                            return 52752
-                        } else if(this.star == 2){
-                            return 62344
-                        } else if(this.star == 3){
-                            return 76731
-                        } else if(this.star == 4){
-                            return 95914
-                        } else {
-                            return 119892
-                        }
-                    } else if(this.cl == 5){
-                        if(this.star == 0){
-                            return 49239
-                        } else if(this.star == 1){
-                            return 54163
-                        } else if(this.star == 2){
-                            return 64011
-                        } else if(this.star == 3){
-                            return 78783
-                        } else if(this.star == 4){
-                            return 98479
-                        } else {
-                            return 123099
-                        }
-                    } else if(this.cl == 6){
-                        if(this.star == 0){
-                            return 50325
-                        } else if(this.star == 1){
-                            return 55357
-                        } else if(this.star == 2){
-                            return 65422
-                        } else if(this.star == 3){
-                            return 80520
-                        } else if(this.star == 4){
-                            return 100650
-                        } else {
-                            return 125812
-                        }
-                    } else {
-                        if(this.star == 0){
-                            return 50325
-                        } else if(this.star == 1){
-                            return 55357
-                        } else if(this.star == 2){
-                            return 65422
-                        } else if(this.star == 3){
-                            return 80520
-                        } else if(this.star == 4){
-                            return 100650
-                        } else {
-                            return 125812
-                        }
+                        return 11000
                     }
                 },
                 OA: function(){
@@ -498,23 +353,16 @@
                     return 100 + Number(this.ATK)
                 },
                 BCd: function() {
-                    if (this.cl == 4){
-                        x = 30
-                    } else if (this.cl == 5){
-                        x = 50
-                    } else {
-                        x = 0
-                    }
-                    return 200 + Number(this.Cd) + Number(this.R2) + Number(x)
+                    return 200 + Number(this.Cd)
                 },
                 m: function() {
-                    return Math.round(this.Fa/(2*this.b*this.OA*this.BATK/100) + this.M/2 + (1 + this.R1/100)/(2*this.b) - (1 + this.BCd/100)/(2*this.a))
+                    return Math.round(this.Fa/(2*this.b*this.OA*this.BATK/100) + this.M/2 + 1/(2*this.b) - (1 + this.BCd/100)/(2*this.a))
                 },
                 n: function() {
                     return Math.round(this.M - this.m)
                 },
                 f: function() {
-                    return Math.round((this.BCd/100 + 1 + this.a*this.m)*(this.A + this.A*this.R1/100 + this.b*this.A*this.n + this.T/100*this.Fa))
+                    return Math.round((this.BCd/100 + 1 + this.a*this.m)*(this.A + this.b*this.A*this.n + this.T/100*this.Fa))
                 }
             }
         })
