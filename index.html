@@ -211,10 +211,7 @@
     <div class="container" id="app">
         <div class="row">
             <h4>Atk/Cdmg calculator</h4>
-            <h6>Calculates the optimal number of atk/cdmg lines on your gear. <br> 
-                <code>Damage = [(Stat-menu-atk x gear-atk% x perk-&-skill-%atk-buff) + flat-atk-buff] x (2 + base-cdmg + cdmg-buff + gear-cdmg) x atk-type</code> <br>
-                Since it doesn't calculate penetration, it is only accurate for 0 def enemies such as training dummy for now, but generally it optimises damage regardless of enemies def value.
-            </h6>
+            <h6>Calculates the optimal number of atk/cdmg lines on your gear. <br> <code>Damage = [(Stat-menu-atk x gear-atk% x perk-&-skill-%atk-buff) + flat-atk-buff] x (2 + base-cdmg + cdmg-buff + gear-cdmg) x atk-type</code></h6>
             <table class="u-full-width" id="calc">
                 <tbody>
                     <tr>
@@ -226,45 +223,33 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Number of Gear Lines available <br>(for atk/cdmg only)</td>
+                        <td class="">Number of Gear Lines available (for atk/cdmg only)</td>
                         <td><input type="number" v-model="M">
                         </td>
                     </tr>
                     <tr>
-                        <td class="">UW raw attack</td>
-                        <td><input type="number" v-model="uw">
+                        <td class="">UW + Base + Earring Raw Atk (only add up raw attack, don't count atk lines from gears)</td>
+                        <td><input type="number" v-model="OA">
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Base damage without gears</td>
-                        <td><input type="number" v-model="base">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">Wearing earrings?</td>
-                        <td class="btn-group">
-                            <input type="radio" name="ear" v-model="ear" value="y" id="yes"><label for="yes" class="first">Yes</label>
-                            <input type="radio" name="ear" v-model="ear" value="n" id="no"><label for="no" class="last">No</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">%Atk buff from Perk/Skill/Artifact (excluding masks) <br>(after skill books effect)</td>
+                        <td class="">Perk/Skill/Artifact %atk buff (after skill books effect)</td>
                         <td><input type="number" v-model="ATK"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Crit Dmg not from gear <br>(Base value seen in stat page + buffs + Perks)</td>
+                        <td class="">Crit Dmg not from gear (Base value seen in stat page + buffs + Perks)</td>
                         <td><input type="number" v-model="Cd"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Flat Attack Buff <br>(from skills, after skill books effect)</td>
-                        <td><input type="number" v-model="Fa">
+                        <td class="">Attack Type Modifier (S1/S2/S3/Auto Attack) (Put 100% if not sure)</td>
+                        <td><input type="number" v-model="T"> %
                         </td>
                     </tr>
                     <tr>
-                        <td class="">Attack Type Modifier <br>(S1/S2/S3/Auto Attack) (Put 100% if not sure)</td>
-                        <td><input type="number" v-model="T"> %
+                        <td class="">Flat Attack Buff (from skills after skill books effect)</td>
+                        <td><input type="number" v-model="Fa">
                         </td>
                     </tr>
 
@@ -273,8 +258,8 @@
                         <td>
                             Number of atk lines: <code>{{n}}</code> <br>
                             Number of crit damage lines: <code>{{m}}</code> <br>
-                            Total Atk boost from gears: <code>{{Math.round(n*b*100)}}%</code> <br>
-                            Total Crit Damage (include default 200% crit damage multiplier): <code>{{Math.round(BCd + m*a*100)}}%</code> <br>
+                            Total Atk: <code>{{Math.round(n*b*100)}}%</code> <br>
+                            Total Crit Damage: <code>{{Math.round(BCd + m*a*100)}}%</code> <br>
                             Final damage value: <code>{{f}}</code> <br>
                         </td>
                     </tr>
@@ -301,33 +286,13 @@
             data: {
                 tier: 8,
                 M: 16,
-                uw: 100,
-                base: 100,
-                ear: 'y',
+                OA: 100,
                 ATK: 0,
                 T: 100,
                 Cd: 0,
                 Fa: 0
             },
             computed: {
-                earring: function(){
-                    if(this.tier == 8){
-                        return 25000
-                    } else if(this.tier == 7){
-                        return 18000
-                    } else {
-                        return 11000
-                    }
-                },
-                OA: function(){
-                    result = Number(this.uw) + Number(this.base)
-                    if (this.ear == 'y'){
-                        result = Number(result) + Number(this.earring)
-                        return result
-                    } else {
-                        return result
-                    }
-                },
                 a: function(){
                     if(this.tier == 8){
                         return 0.24
