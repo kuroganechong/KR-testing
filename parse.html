@@ -32,994 +32,149 @@
     <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
-    <div id="app" style="margin-left: 10px">
-        <div v-html="print">
-        </div>
-        <strong>gap</strong>
-        <div v-html="print2">
-        </div>
+    <div id="app">
+        {{ hero.name }}
     </div>
 </body>
 
 <script>
-var atklist = {
-    "1": {
-        "s3": {
-            "description": "ATK is increased by 46364 x 1.25",
-            "light": "",
-            "dark": "ATK boost x 1.4",
-            "ut": ""
-        }
+var hero = {
+  "name": "Kasel",
+  "subtitle": "Warrior of the Holy Sword",
+  "description": "The Chosen Warrior of the Holy Sword Aea, the sword that saved the world once before. He can push back enemies and enhance himself with the power of this holy sword.",
+  "story": "A squire of the Kingdom of Orvelia. Traumatized by witnessing the deaths of his parents at the hands of the Demons invading the village, and later, the assassination of his sword teacher, he fears the idea of anyone around him dying. His past has driven him to seek out his sworn brother from his early years in the orphanage, Clause, who joined an expedition, but never returned.",
+  "like": "Food from the nature",
+  "dislike": "Fatalism",
+  "inn": {
+    "idle": "Is it ok to rest...even if rest is needed...",
+    "recruit": {
+      "greet": "It's been a while. How are you?",
+      "talk": [
+        "I hope the world becomes peaceful soon.",
+        "This sword...is heavy.",
+        "I don't believe in fate."
+      ],
+      "gift": "Thank you. This will help end the battle quickly."
     },
-    "4": {
-        "s2": {
-            "description": "ATK is increased by 36035 x 1.25",
-            "light": "ATK boost x 1.4",
-            "dark": "",
-            "ut": ""
-        }
+    "affinity": {
+      "greet": "I'm seeing you around quite often. Are you getting to the capital now?",
+      "talk": [
+        "Will all this end once I find the power of the Holy Sword?",
+        "I don't want to be swayed by anyone else. I'll go my own way."
+      ],
+      "gift": "A gift for an unpopular man like myself... Thank you."
     },
-    "5": {
-        "uw": [
-            "Every 1% HP lost, ATK is increased by 0.8% ",
-            "Every 1% HP lost, ATK is increased by 1%",
-            "Every 1% HP lost, ATK is increased by 1.2%",
-            "Every 1% HP lost, ATK is increased by 1.4%",
-            "Every 1% HP lost, ATK is increased by 1.7%",
-            "Every 1% HP lost, ATK is increased by 2%"
-        ],
-        "s2": {
-            "description": "All allies' ATK is increased by 17065 x 1.5",
-            "light": "ATK boost x 1.4",
-            "dark": "",
-            "ut": [
-                "increases ATK Boost by 20%.",
-                "increases ATK Boost by 24%.",
-                "increases ATK Boost by 29%.",
-                "increases ATK Boost by 35%.",
-                "increases ATK Boost by 42%.",
-                "increases ATK Boost by 50%."
-            ]
-        },
-        "s4": {
-            "description": "ATK is increased by 4003 x 1.25 for {0} sec. Can be stacked up to 10 times max.",
-            "light": "ATK boost x 1.4",
-            "dark": ""
-        }
-    },
-    "8": {
-        "s3": {
-            "description": "all allies' ATK is increased by 18126 x 1.25",
-            "light": "ATK boost x 1.4",
-            "dark": "",
-            "ut": ""
-        }
-    },
-    "9": {
-        "s1": {
-            "description": "",
-            "light": "",
-            "dark": "",
-            "ut": [
-                "ATK is increased by 20% for 10 sec. ATK increase effect can be stacked up to max 3 times.",
-                "ATK is increased by 20% for 10 sec. ATK increase effect can be stacked up to max 3 times.",
-                "ATK is increased by 20% for 10 sec. ATK increase effect can be stacked up to max 3 times.",
-                "ATK is increased by 20% for 10 sec. ATK increase effect can be stacked up to max 3 times.",
-                "ATK is increased by 20% for 10 sec. ATK increase effect can be stacked up to max 3 times.",
-                "ATK is increased by 20% for 10 sec. ATK increase effect can be stacked up to max 3 times."
-            ]
-        },
-        "s4": {
-            "description": "ATK is increased by 14541 x 1.25",
-            "light": "",
-            "dark": ""
-        }
-    },
-    "12": {
-        "s1": {
-            "description": "",
-            "light": "",
-            "dark": "ATK is increased by 35%",
-            "ut": ""
-        }
-    },
-    "15": {
-        "uw": [
-            "ATK is increased by 100% of P.DEF",
-            "ATK is increased by 120% of P.DEF",
-            "ATK is increased by 144% of P.DEF",
-            "ATK is increased by 173% of P.DEF",
-            "ATK is increased by 207% of P.DEF",
-            "ATK is increased by 250% of P.DEF"
-        ]
-    },
-    "18": {
-        "s4": {
-            "description": "ATK is increased by 8424 x 1.25 for {0} sec. Can be stacked up to 8 times max.",
-            "light": "",
-            "dark": ""
-        }
-    },
-    "21": {
-        "s2": {
-            "description": "ATK is increased by 25079 x 1.5.",
-            "light": "",
-            "dark": "",
-            "ut": [
-                "Increases ATK Boost by 50%",
-                "Increases ATK Boost by 50%",
-                "Increases ATK Boost by 50%",
-                "Increases ATK Boost by 50%",
-                "Increases ATK Boost by 50%",
-                "Increases ATK Boost by 50%"
-            ]
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / P.Dodge +100",
-            "dark": "ATK is boosted by 3%. The ATK and Atk Spd Boosts can stack up to 10 times."
-        }
-    },
-    "22": {
-        "s2": {
-            "description": "ATK is increased by 23809 x 1.25.",
-            "light": "",
-            "dark": "",
-            "ut": [
-                "increasing ATK by 20% for 10 sec.",
-                "increasing ATK by 24% for 10 sec.",
-                "increasing ATK by 29% for 10 sec.",
-                "increasing ATK by 35% for 10 sec.",
-                "increasing ATK by 42% for 10 sec.",
-                "increasing ATK by 50% for 10 sec."
-            ]
-        }
-    },
-    "24": {
-        "s3": {
-            "description": "",
-            "light": "",
-            "dark": "all allies gain 50% ATK.",
-            "ut": [
-                "ATK is increased by 25%",
-                "ATK is increased by 25%",
-                "ATK is increased by 25%",
-                "ATK is increased by 25%",
-                "ATK is increased by 25%",
-                "ATK is increased by 25%"
-            ]
-        }
-    },
-    "31": {
-        "s3": {
-            "description": "",
-            "light": "",
-            "dark": "",
-            "ut": [
-                "all allies' ATK is increased by 30%",
-                "all allies' ATK is increased by 30%",
-                "all allies' ATK is increased by 30%",
-                "all allies' ATK is increased by 30%",
-                "all allies' ATK is increased by 30%",
-                "all allies' ATK is increased by 30%"
-            ]
-        }
-    },
-    "32": {
-        "uw": [
-            "ATK is increased by 20%.",
-            "ATK is increased by 24%.",
-            "ATK is increased by 29%.",
-            "ATK is increased by 35%.",
-            "ATK is increased by 42%.",
-            "ATK is increased by 50%."
-        ],
-        "s4": {
-            "description": "ATK is increased by 15594",
-            "light": "",
-            "dark": ""
-        }
-    },
-    "33": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "ATK is boosted by 10% per each Blade Stack he holds."
-        }
-    },
-    "34": {
-        "s4": {
-            "description": "ATK is increased by 31614 x 1.25",
-            "light": "ATK boost x 1.4",
-            "dark": ""
-        }
-    },
-    "35": {
-        "s2": {
-            "description": "ATK is increased by 23600 x 1.5",
-            "light": "100% in ATK increase.",
-            "dark": "",
-            "ut": ""
-        }
-    },
-    "36": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / P. Block +200",
-            "dark": "all allies' ATK is increased by 50% of own M.DEF"
-        }
-    },
-    "37": {
-        "s3": {
-            "description": "",
-            "light": "",
-            "dark": "",
-            "ut": [
-                "ATK is increased by 20% for 10 sec.",
-                "ATK is increased by 20% for 10 sec.",
-                "ATK is increased by 20% for 10 sec.",
-                "ATK is increased by 20% for 10 sec.",
-                "ATK is increased by 20% for 10 sec.",
-                "ATK is increased by 20% for 10 sec."
-            ]
-        }
-    },
-    "38": {
-        "s1": {
-            "description": "",
-            "light": "",
-            "dark": "ATK is increased by 40% for 5 sec.",
-            "ut": ""
-        },
-        "s4": {
-            "description": "ATK is increased by 74819",
-            "light": "",
-            "dark": ""
-        }
-    },
-    "39": {
-        "s2": {
-            "description": "all allies' ATK is increased by 10538 x 1.5",
-            "light": "ATK boost x 1.4",
-            "dark": "",
-            "ut": ""
-        }
-    },
-    "40": {
-        "s2": {
-            "description": "ATK is increased by 31614 x 1.5.",
-            "light": "",
-            "dark": "ATK increase rate is increased by 100%.",
-            "ut": ""
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit Chance +100",
-            "dark": "ATK is increased by 50%"
-        }
-    },
-    "42": {
-        "uw": [
-            "ATK is increased by 14% for 10 sec.",
-            "ATK is increased by 17% for 10 sec.",
-            "ATK is increased by 21% for 10 sec.",
-            "ATK is increased by 25% for 10 sec.",
-            "ATK is increased by 30% for 10 sec.",
-            "ATK is increased by 35% for 10 sec."
-        ]
-    },
-    "43": {
-        "s1": {
-            "description": "ATK is increased by {2}",
-            "light": "",
-            "dark": "",
-            "ut": ""
-        },
-        "s4": {
-            "description": "",
-            "light": "",
-            "dark": "Per each stacked Soul, ATK is increased by 10%"
-        }
-    },
-    "44": {
-        "s4": {
-            "description": "ATK is increased by {0}",
-            "light": "ATK boost x 1.4",
-            "dark": ""
-        }
-    },
-    "45": {
-        "s3": {
-            "description": "ATK is increased by {0}",
-            "light": "",
-            "dark": "",
-            "ut": ""
-        },
-        "s4": {
-            "description": "ATK is increased by {0}",
-            "light": "",
-            "dark": ""
-        }
-    },
-    "49": {
-        "s4": {
-            "description": "All allies' ATK is increased by {0} [Death] - ATK is increased by {2}%.",
-            "light": "",
-            "dark": ""
-        }
-    },
-    "50": {
-        "s3": {
-            "description": "ATK is increased by {1}",
-            "light": "",
-            "dark": "",
-            "ut": ""
-        }
-    },
-    "55": {
-        "s4": {
-            "description": "ATK is increased by {0}",
-            "light": "",
-            "dark": ""
-        }
-    },
-    "57": {
-        "s2": {
-            "description": "mana recovery rate per sec is increased by 150% and ATK is increased by {0}.",
-            "light": "activated on the ally with the highest ATK excluding self.",
-            "dark": "all effects are increased by 100%.",
-            "ut": ""
-        },
-        "s4": {
-            "description": "ATK is increased by {0} and mana recovery per sec is increased to 120. Per 6 mana recovery per sec, ATK is increased by 1%.",
-            "light": "",
-            "dark": ""
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "ATK is increased by 15% per 1 orb of mana."
-        }
-    },
-    "63": {
-        "s2": {
-            "description": "ATK is increased by {0}",
-            "light": "ATK and DEF boosts are increased by 40%.",
-            "dark": "",
-            "ut": ""
-        }
-    },
-    "64": {
-        "uw": [
-            "ATK is increased by 20%.",
-            "ATK is increased by 24%.",
-            "ATK is increased by 29%.",
-            "ATK is increased by 35%.",
-            "ATK is increased by 42%.",
-            "ATK is increased by 50%."
-        ],
-        "s4": {
-            "description": "Blessing of Light can be stacked up to 10 times max. Per every stack, ATK is increased by {1}",
-            "light": "",
-            "dark": "Maximum stack count is increased to 12."
-        }
-    },
-    "90": {
-        "s1": {
-            "description": "All allies' ATK is increased by {0} for 60 sec",
-            "light": "",
-            "dark": "All effects can be stacked max 7 times.",
-            "ut": ""
-        }
-    },
-    "91": {
-        "s2": {
-            "description": "ATK is boosted by {1}",
-            "light": "",
-            "dark": "",
-            "ut": ""
-        }
-    },
-    "92": {
-        "s4": {
-            "description": "All Allies' ATK is increased by {0}",
-            "light": "",
-            "dark": "increases the caster's ATK by 50%."
-        }
+    "relationship": {
+      "greet": "I am always thankful for your help.",
+      "talk": [
+        "It would be a lie to say it isn't difficult, but that's life, I guess.",
+        "Thank you for sharing my burden. Really.",
+        "There is no such thing as a perfect life. Well, there are some perfect moments, though. Haha..."
+      ]
     }
-}
-
-var cdmglist = {
-    "4": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Upon a Crit Hit, there is a 10% chance of ATK Spd increasing by 300 and Crit DMG increasing by 60% for 5 sec. Does not activate again during activation."
-        }
+  },
+  "uw": {
+    "name": "The Holy Sword, Aea",
+    "description": [
+      "Each attack has a 35% chance of dealing 160% of ATK as P.DMG.",
+      "Each attack has a 35% chance of dealing 192% of ATK as P.DMG.",
+      "Each attack has a 35% chance of dealing 230% of ATK as P.DMG.",
+      "Each attack has a 35% chance of dealing 276% of ATK as P.DMG.",
+      "Each attack has a 35% chance of dealing 331% of ATK as P.DMG.",
+      "Each attack has a 35% chance of dealing 400% of ATK as P.DMG."
+    ],
+    "story": "A legendary Holy Sword given to the world by Lua. This legendary artifact materialized 100 years ago when the Demons invaded the Orbis Continent through the Dimensional Gate. According to the legend, the Hero King Kyle used this sword to pierce the heart of the Dark Lord Angmund and brought an end to the war. However, the two simply vanished, and only Aea remained."
+  },
+  "s1": {
+    "name": "Judgement Blade",
+    "description": "Deals {0} P.DMG 2 times to frontal enemies in a circle and knocks them down for {1} sec.",
+    "books": {
+      "0": "DMG is increased by {0}%.",
+      "1": "DMG is increased by {0}%.",
+      "2": "DMG is increased by {0}%."
     },
-    "7": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Upon a Critical Hit, gain 5% Crit DMG and 30 CC Accuracy. Stacks up to 10 times."
-        }
-    },
-    "8": {
-        "s3": {
-            "description": "For {0} sec, all allies' ATK is increased by {1} , and ATK Spd is increased by {2}.",
-            "light": "ATK boost x 1.4",
-            "dark": "Cooldown is reduced by 3 sec.",
-            "ut": [
-                "[Swift Wind] Mana cost is reduced by 1, and Crit DMG 20% boost effect is added.",
-                "[Swift Wind] Mana cost is reduced by 1, and Crit DMG 24% boost effect is added.",
-                "[Swift Wind] Mana cost is reduced by 1, and Crit DMG 29% boost effect is added.",
-                "[Swift Wind] Mana cost is reduced by 1, and Crit DMG 35% boost effect is added.",
-                "[Swift Wind] Mana cost is reduced by 1, and Crit DMG 42% boost effect is added.",
-                "[Swift Wind] Mana cost is reduced by 1, and Crit DMG 50% boost effect is added."
-            ]
-        }
-    },
-    "9": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "All of Epis's attacks decrease the M.DEF of hit enemies by 20% for 10 sec. ATK rises by 2% per each enemy hit. Maximum stack number is 10."
-        }
-    },
-    "10": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Own Crit Chance is decreased by 300 and Crit DMG is increased by 100%."
-        }
-    },
-    "18": {
-        "uw": [
-            "Upon a Crit Hit, ATK Spd is increased by 80 and Crit DMG is increased by 20% for 15 sec. Can be stacked up to 5 times max.",
-            "Upon a Crit Hit, ATK Spd is increased by 90 and Crit DMG is increased by 24% for 15 sec. Can be stacked up to 5 times max.",
-            "Upon a Crit Hit, ATK Spd is increased by 110 and Crit DMG is increased by 28% for 15 sec. Can be stacked up to 5 times max.",
-            "Upon a Crit Hit, ATK Spd is increased by 130 and Crit DMG is increased by 34% for 15 sec. Can be stacked up to 5 times max.",
-            "Upon a Crit Hit, ATK Spd is increased by 160 and Crit DMG is increased by 41% for 15 sec. Can be stacked up to 5 times max.",
-            "Upon a Crit Hit, ATK Spd is increased by 200 and Crit DMG is increased by 50% for 15 sec. Can be stacked up to 5 times max."
-        ],
-        "s2": {
-            "description": "Increases ATK by {1} for {0} sec and increases Crit Chance by {2}. This effect cannot be dispelled.",
-            "light": "Mana cost is reduced by 1.",
-            "dark": "In exchange for 1 additional Mana Cost, Crit Chance effect is changed to a 100% Crit DMG boost. Also gains a 25% DMG boost towards Bosses.",
-            "ut": [
-                "[Sharp End] Increases ATK Boost by 50% and recovers additional 40 MP upon a Crit Hit for the skill's duration.",
-                "[Sharp End] Increases ATK Boost by 50% and recovers additional 48 MP upon a Crit Hit for the skill's duration.",
-                "[Sharp End] Increases ATK Boost by 50% and recovers additional 58 MP upon a Crit Hit for the skill's duration.",
-                "[Sharp End] Increases ATK Boost by 50% and recovers additional 70 MP upon a Crit Hit for the skill's duration.",
-                "[Sharp End] Increases ATK Boost by 50% and recovers additional 84 MP upon a Crit Hit for the skill's duration.",
-                "[Sharp End] Increases ATK Boost by 50% and recovers additional 100 MP upon a Crit Hit for the skill's duration."
-            ]
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "When auto attacking, there is a 10% chance to increase Crit DMG by 100% for 5 sec."
-        }
-    },
-    "19": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Every 3 sec, attacks all enemies and deals 50% of ATK as M.DMG, inflicting Frost with 50% chance. Enemies already inflicted with Frost takes 300% of ATK as M.DMG over time for 3 sec."
-        }
-    },
-    "25": {
-        "s2": {
-            "description": "Engraves a Mark on all enemies for {0} sec and deals {1} M.DMG over time. Enemies engraved with Mark takes {2}% more M.DMG.",
-            "light": "Duration is reduced to 10 sec and DMG is boosted by 250%.",
-            "dark": "Engraved Mark is not be dispelled when negative effects are dispelled.",
-            "ut": [
-                "[Mark of Death] Increases ATK by 5% and Crit DMG by 10% for 20 sec when the marked enemy dies. This effect stacks up to 8 times.",
-                "[Mark of Death] Increases ATK by 5% and Crit DMG by 12% for 20 sec when the marked enemy dies. This effect stacks up to 8 times.",
-                "[Mark of Death] Increases ATK by 5% and Crit DMG by 14% for 20 sec when the marked enemy dies. This effect stacks up to 8 times.",
-                "[Mark of Death] Increases ATK by 5% and Crit DMG by 17% for 20 sec when the marked enemy dies. This effect stacks up to 8 times.",
-                "[Mark of Death] Increases ATK by 5% and Crit DMG by 21% for 20 sec when the marked enemy dies. This effect stacks up to 8 times.",
-                "[Mark of Death] Increases ATK by 5% and Crit DMG by 25% for 20 sec when the marked enemy dies. This effect stacks up to 8 times."
-            ]
-        }
-    },
-    "26": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit Chance +100",
-            "dark": "Each skill use stacks Darkness. Each stack boosts her Mana regen per sec by 6% and boosts her Crit DMG by 2%. (Maximum Stack number is 50)"
-        }
-    },
-    "29": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "When auto-attacking, there is a 10% chance to knock back the enemy across a long distance and inflict Stun for 3 sec. Also, increase ATK Spd by 500 for 3 sec."
-        }
-    },
-    "33": {
-        "s2": {
-            "description": "Dispels all positive effects of target enemy and deals {0} P.DMG. Hit enemies take {2} P.DMG for {1} sec, and are knocked down for 3 sec. The number of target increases depending on the number of Blade stacks.",
-            "light": "Mana cost is reduced by 1.",
-            "dark": "Target receives 25% increased P.DMG for 10 sec.",
-            "ut": [
-                "[Dimension Cleaver] DMG is increased by 50% and own Crit DMG is increased by 10% for 8 sec per each hit enemies. This effect can be stacked max 5 times.",
-                "[Dimension Cleaver] DMG is increased by 50% and own Crit DMG is increased by 12% for 8 sec per each hit enemies. This effect can be stacked max 5 times.",
-                "[Dimension Cleaver] DMG is increased by 50% and own Crit DMG is increased by 14% for 8 sec per each hit enemies. This effect can be stacked max 5 times.",
-                "[Dimension Cleaver] DMG is increased by 50% and own Crit DMG is increased by 17% for 8 sec per each hit enemies. This effect can be stacked max 5 times.",
-                "[Dimension Cleaver] DMG is increased by 50% and own Crit DMG is increased by 21% for 8 sec per each hit enemies. This effect can be stacked max 5 times.",
-                "[Dimension Cleaver] DMG is increased by 50% and own Crit DMG is increased by 25% for 8 sec per each hit enemies. This effect can be stacked max 5 times."
-            ]
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "When auto attacking, there is a 10% chance of stacking 1 stack of Blade. Nyx's ATK is boosted by 10% per each Blade Stack he holds."
-        }
-    },
-    "35": {
-        "s2": {
-            "description": "For 20 sec, ATK is increased by {0} , and ACC is increased by {1}. Each auto attack has a 15% chance of activating 'Bang! Bang!!'.",
-            "light": "Takes 20% more DMG from all sources in exchange for an extra 100% in ATK increase.",
-            "dark": "Bang! Bang! chance is increased by 10%.",
-            "ut": [
-                "[Time to Die!] Increases Crit DMG by 20% for the skill's duration. HP cannot be reduced below 10% for 3 sec.",
-                "[Time to Die!] Increases Crit DMG by 24% for the skill's duration. HP cannot be reduced below 10% for 3 sec.",
-                "[Time to Die!] Increases Crit DMG by 29% for the skill's duration. HP cannot be reduced below 10% for 3 sec.",
-                "[Time to Die!] Increases Crit DMG by 35% for the skill's duration. HP cannot be reduced below 10% for 3 sec.",
-                "[Time to Die!] Increases Crit DMG by 42% for the skill's duration. HP cannot be reduced below 10% for 3 sec.",
-                "[Time to Die!] Increases Crit DMG by 50% for the skill's duration. HP cannot be reduced below 10% for 3 sec."
-            ]
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Upon a Crit Hit, increase Crit DMG by 0.5% and Atk Spd by 5. Max stack number is 100."
-        }
-    },
-    "37": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Auto attack damage is boosted by 50% while in Stealth mode."
-        }
-    },
-    "38": {
-        "uw": [
-            "Fury duration is increased by 2 sec and when in Fury state, Crit DMG is increased by 80%.",
-            "Fury duration is increased by 3 sec and when in Fury state, Crit DMG is increased by 90%.",
-            "Fury duration is increased by 4 sec and when in Fury state, Crit DMG is increased by 100%.",
-            "Fury duration is increased by 5 sec and when in Fury state, Crit DMG is increased by 110%.",
-            "Fury duration is increased by 6 sec and when in Fury state, Crit DMG is increased by 120%.",
-            "Fury duration is increased by 7 sec and when in Fury state, Crit DMG is increased by 130%."
-        ]
-    },
-    "39": {
-        "s2": {
-            "description": "For 15 sec, all allies' ATK is increased by {0} and Crit Chance is increased by {1}.",
-            "light": "ATK boost x 1.4",
-            "dark": "Mana cost is reduced by 1.",
-            "ut": [
-                "[Fiercely!] Increases duration by 5 sec and additionally increases Crit DMG by 20%.",
-                "[Fiercely!] Increases duration by 5 sec and additionally increases Crit DMG by 24%.",
-                "[Fiercely!] Increases duration by 5 sec and additionally increases Crit DMG by 29%.",
-                "[Fiercely!] Increases duration by 5 sec and additionally increases Crit DMG by 35%.",
-                "[Fiercely!] Increases duration by 5 sec and additionally increases Crit DMG by 42%.",
-                "[Fiercely!] Increases duration by 5 sec and additionally increases Crit DMG by 50%."
-            ]
-        }
-    },
-    "40": {
-        "uw": [
-            "Each auto attack and skill attack stacks 'Lightning' on self. Upon the 50th stack, 'Lightning Bolt, Legios' activates, and for 10 sec, ATK Spd is increased by 300, Crit DMG is increased by 100%, and Penetration is increased by 300. While 'Lightning Bolt, Legios' is activated, Lightning will not stack. This effect cannot be dispelled.",
-            "Each auto attack and skill attack stacks 'Lightning' on self. Upon the 50th stack, 'Lightning Bolt, Legios' activates, and for 10 sec, ATK Spd is increased by 360, Crit DMG is increased by 120%, and Penetration is increased by 360. While 'Lightning Bolt, Legios' is activated, Lightning will not stack. This effect cannot be dispelled.",
-            "Each auto attack and skill attack stacks 'Lightning' on self. Upon the 50th stack, 'Lightning Bolt, Legios' activates, and for 10 sec, ATK Spd is increased by 430, Crit DMG is increased by 144%, and Penetration is increased by 430. While 'Lightning Bolt, Legios' is activated, Lightning will not stack. This effect cannot be dispelled.",
-            "Each auto attack and skill attack stacks 'Lightning' on self. Upon the 50th stack, 'Lightning Bolt, Legios' activates, and for 10 sec, ATK Spd is increased by 520, Crit DMG is increased by 173%, and Penetration is increased by 520. While 'Lightning Bolt, Legios' is activated, Lightning will not stack. This effect cannot be dispelled.",
-            "Each auto attack and skill attack stacks 'Lightning' on self. Upon the 50th stack, 'Lightning Bolt, Legios' activates, and for 10 sec, ATK Spd is increased by 620, Crit DMG is increased by 208%, and Penetration is increased by 620. While 'Lightning Bolt, Legios' is activated, Lightning will not stack. This effect cannot be dispelled.",
-            "Each auto attack and skill attack stacks 'Lightning' on self. Upon the 50th stack, 'Lightning Bolt, Legios' activates, and for 10 sec, ATK Spd is increased by 750, Crit DMG is increased by 250%, and Penetration is increased by 750. While 'Lightning Bolt, Legios' is activated, Lightning will not stack. This effect cannot be dispelled."
-        ],
-        "s1": {
-            "description": "Attacks 16 times, dealing a total of {0} M.DMG to enemies in range. Upon each Crit Hit, Crit DMG is increased by 3% for 10 sec, and there is a 30% chance to deal {1} extra M.DMG, inflicting stun for 0.3 sec. Crit DMG boost can be stacked up to 30 times max.",
-            "light": "If there is 1 enemy, DMG is increased by 100%.",
-            "dark": "Cooldown is reduced by 2 sec.",
-            "ut": [
-                "[Final Crash] Dispels all negative effects from self, and upon each hit, has an 8% chance to remove all positive effects from the target.",
-                "[Final Crash] Dispels all negative effects from self, and upon each hit, has an 10% chance to remove all positive effects from the target.",
-                "[Final Crash] Dispels all negative effects from self, and upon each hit, has an 12% chance to remove all positive effects from the target.",
-                "[Final Crash] Dispels all negative effects from self, and upon each hit, has an 14% chance to remove all positive effects from the target.",
-                "[Final Crash] Dispels all negative effects from self, and upon each hit, has an 17% chance to remove all positive effects from the target.",
-                "[Final Crash] Dispels all negative effects from self, and upon each hit, has an 20% chance to remove all positive effects from the target."
-            ]
-        }
-    },
-    "41": {
-        "s1": {
-            "description": "Heals all allies by {0} and makes them immune to the next single hit of DMG.",
-            "light": "Boosts healed ally ATK by 10% for 10 sec.",
-            "dark": "Mana cost is reduced by 1.",
-            "ut": [
-                "[Healing Salve] Increases Heal Rate by 50%, and for 10 sec, increases the targets' Crit DMG by 20%.",
-                "[Healing Salve] Increases Heal Rate by 50%, and for 10 sec, increases the targets' Crit DMG by 24%.",
-                "[Healing Salve] Increases Heal Rate by 50%, and for 10 sec, increases the targets' Crit DMG by 29%.",
-                "[Healing Salve] Increases Heal Rate by 50%, and for 10 sec, increases the targets' Crit DMG by 35%.",
-                "[Healing Salve] Increases Heal Rate by 50%, and for 10 sec, increases the targets' Crit DMG by 42%.",
-                "[Healing Salve] Increases Heal Rate by 50%, and for 10 sec, increases the targets' Crit DMG by 50%."
-            ]
-        }
-    },
-    "43": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit Chance +100",
-            "dark": "Per each stacked Soul, Crit Chance is increased by 50 and Crit DMG is increased by 30%."
-        }
-    },
-    "44": {
-        "s1": {
-            "description": "Deals {0} P.DMG to frontal enemies in range and stuns them for 1 sec. This attack always inflicts a Crit Hit.",
-            "light": "Stun duration is increased by 2 sec.",
-            "dark": "No longer Crits unconditionally, and Crit DMG is increased by 150%.",
-            "ut": [
-                "[Vital Strike] Increases DMG by 50%, and for 10 sec, reduces the target's P.Block chance by 200.",
-                "[Vital Strike] Increases DMG by 50%, and for 10 sec, reduces the target's P.Block chance by 240.",
-                "[Vital Strike] Increases DMG by 50%, and for 10 sec, reduces the target's P.Block chance by 290.",
-                "[Vital Strike] Increases DMG by 50%, and for 10 sec, reduces the target's P.Block chance by 350.",
-                "[Vital Strike] Increases DMG by 50%, and for 10 sec, reduces the target's P.Block chance by 420.",
-                "[Vital Strike] Increases DMG by 50%, and for 10 sec, reduces the target's P.Block chance by 500."
-            ]
-        },
-        "s2": {
-            "description": "For 20 sec, places Priscilla and an ally with the highest ATK in 'Coordination' state, and dispels Negative Effects. Priscilla and the ally in Coordination State get an ATK boost equal to 15% of Priscilla's ATK + {0}.",
-            "light": "Crit DMG is increased by 80%.",
-            "dark": "While in Co-Op state, auto attacks increase the target's received DMG from all sources by 15%.",
-            "ut": [
-                "[Coordination] Increases ATK Boost by 20% and reduces Cooldown of the Hero with the highest ATK by 30%.",
-                "[Coordination] Increases ATK Boost by 24% and reduces Cooldown of the Hero with the highest ATK by 30%.",
-                "[Coordination] Increases ATK Boost by 29% and reduces Cooldown of the Hero with the highest ATK by 30%.",
-                "[Coordination] Increases ATK Boost by 35% and reduces Cooldown of the Hero with the highest ATK by 30%.",
-                "[Coordination] Increases ATK Boost by 42% and reduces Cooldown of the Hero with the highest ATK by 30%.",
-                "[Coordination] Increases ATK Boost by 50% and reduces Cooldown of the Hero with the highest ATK by 30%."
-            ]
-        }
-    },
-    "45": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Auto-attacks ignore enemy Block effects."
-        }
-    },
-    "46": {
-        "s1": {
-            "description": "Deals {0} P.DMG enemies in a wide range, and per each hit enemy, skill cooldown is decreased by 1 sec. Deals {1} P.DMG to enemies inflicted by [Mark of Desert] and removes 1 stack of [Mark of Desert]. Upon each skill use, Crit DMG is increased by 5%. This effect can be stacked up to max 12 times and cannot be dispelled.",
-            "light": "Crit DMG boost per use changes to 10%.",
-            "dark": "Hit enemy is inflicted by Blind for 1 sec.",
-            "ut": [
-                "[Judgment of the Desert] Increases DMG by 2% upon every use. There is a 30% chance that the hit enemy is inflicted with the Mark of Desert. DMG increase effect can be stacked up to max 20 times.",
-                "[Judgment of the Desert] Increases DMG by 2.4% upon every use. There is a 30% chance that the hit enemy is inflicted with the Mark of Desert. DMG increase effect can be stacked up to max 20 times.",
-                "[Judgment of the Desert] Increases DMG by 2.9% upon every use. There is a 30% chance that the hit enemy is inflicted with the Mark of Desert. DMG increase effect can be stacked up to max 20 times.",
-                "[Judgment of the Desert] Increases DMG by 3.5% upon every use. There is a 30% chance that the hit enemy is inflicted with the Mark of Desert. DMG increase effect can be stacked up to max 20 times.",
-                "[Judgment of the Desert] Increases DMG by 4.2% upon every use. There is a 30% chance that the hit enemy is inflicted with the Mark of Desert. DMG increase effect can be stacked up to max 20 times.",
-                "[Judgment of the Desert] Increases DMG by 5% upon every use. There is a 30% chance that the hit enemy is inflicted with the Mark of Desert. DMG increase effect can be stacked up to max 20 times."
-            ]
-        }
-    },
-    "49": {
-        "s3": {
-            "description": "Attacks the target and the enemies near it to deal {0} M.DMG. This attack cannot miss and deals 100% increased Crit DMG. Gains [Luck] card upon use. [Death] - Crit DMG increases by 120%. [Love] - Removes all positive effects from enemies in range and silences them for 2 sec. [Luck] - Cooldown does not apply. Recovers 1 orb of Mana.",
-            "light": "Mana cost is increased by 1 orb but DMG is boosted by 100%.",
-            "dark": "Always inflicts a Crit Hit.",
-            "ut": [
-                "[Card of Fortune - Vellekia] Mana cost is reduced by 1 and DMG is increased by 20%.",
-                "[Card of Fortune - Vellekia] Mana cost is reduced by 1 and DMG is increased by 24%.",
-                "[Card of Fortune - Vellekia] Mana cost is reduced by 1 and DMG is increased by 29%.",
-                "[Card of Fortune - Vellekia] Mana cost is reduced by 1 and DMG is increased by 35%.",
-                "[Card of Fortune - Vellekia] Mana cost is reduced by 1 and DMG is increased by 42%.",
-                "[Card of Fortune - Vellekia] Mana cost is reduced by 1 and DMG is increased by 50%."
-            ]
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Upon using a skill, there is a 7% chance that mana cost of all skill is reduced by 1 for 7 sec. This effect cannot be dispelled."
-        }
-    },
-    "52": {
-        "uw": [
-            "The normal attack shoots an additional bullet that deals 50% of ATK as P.DMG. When the skill ends, 'Hellhound, Akistra' is activated, increasing ATK by 30% and Crit DMG by 30% for 20 sec. 'Hellhound, Akistra' is only activated once at 20 sec.",
-            "The normal attack shoots an additional bullet that deals 60% of ATK as P.DMG. When the skill ends, 'Hellhound, Akistra' is activated, increasing ATK by 36% and Crit DMG by 36% for 20 sec. 'Hellhound, Akistra' is only activated once at 20 sec.",
-            "The normal attack shoots an additional bullet that deals 70% of ATK as P.DMG. When the skill ends, 'Hellhound, Akistra' is activated, increasing ATK by 43% and Crit DMG by 43% for 20 sec. 'Hellhound, Akistra' is only activated once at 20 sec.",
-            "The normal attack shoots an additional bullet that deals 85% of ATK as P.DMG. When the skill ends, 'Hellhound, Akistra' is activated, increasing ATK by 52% and Crit DMG by 52% for 20 sec. 'Hellhound, Akistra' is only activated once at 20 sec.",
-            "The normal attack shoots an additional bullet that deals 100% of ATK as P.DMG. When the skill ends, 'Hellhound, Akistra' is activated, increasing ATK by 62% and Crit DMG by 62% for 20 sec. 'Hellhound, Akistra' is only activated once at 20 sec.",
-            "The normal attack shoots an additional bullet that deals 125% of ATK as P.DMG. When the skill ends, 'Hellhound, Akistra' is activated, increasing ATK by 75% and Crit DMG by 75% for 20 sec. 'Hellhound, Akistra' is only activated once at 20 sec."
-        ],
-        "s4": {
-            "description": "Crow is not affected by changes in ATK Spd. ATK increases by {0} and Crit DMG by {1}%. Recovers {2} Mana every second. It also leaves a 'Hunting Dog's Fang Mark' to target for 40 sec when dealing a normal attack.",
-            "light": "Boss monster takes 15% increased DMG.",
-            "dark": "Mana recovery increases by 40%."
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Increases Mana Cost of all skills by 1 and DMG by 75%."
-        }
-    },
-    "55": {
-        "s4": {
-            "description": "ATK is increased by {0}. Upon a critical skill hit, own Crit DMG is increased by {1}%. This effect can be stacked up to 30 times.",
-            "light": "Takes 0.7% reduced DMG per stack.",
-            "dark": "When the battle starts, increases DMG to Non-Hero enemies by 25% for 200 sec."
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "All of caster's attacks will be critical hits, but the caster becomes unable to block while taking 25% increased damage."
-        }
-    },
-    "57": {
-        "s2": {
-            "description": "When activated, turns into the Everlasting Oasis state for 15 sec. During the Everlasting Oasis state, mana recovery rate per sec is increased by 150% and ATK is increased by {0}. Additionally, all DEF is increased by {1}.",
-            "light": "Mana cost is increased by 1 and is additionally activated on the ally with the highest ATK excluding self.",
-            "dark": "Skill duration is decreased by 5 sec and all effects are increased by 100%.",
-            "ut": [
-                "[Everlasting Oasis] The effect cannot be dispelled, and Crit DMG is increased by 20% during skill duration.",
-                "[Everlasting Oasis] The effect cannot be dispelled, and Crit DMG is increased by 24% during skill duration.",
-                "[Everlasting Oasis] The effect cannot be dispelled, and Crit DMG is increased by 29% during skill duration.",
-                "[Everlasting Oasis] The effect cannot be dispelled, and Crit DMG is increased by 35% during skill duration.",
-                "[Everlasting Oasis] The effect cannot be dispelled, and Crit DMG is increased by 42% during skill duration.",
-                "[Everlasting Oasis] The effect cannot be dispelled, and Crit DMG is increased by 50% during skill duration."
-            ]
-        },
-        "s3": {
-            "description": "Throws water drops 15 times to random enemies, dealing a total of {0} P.DMG. Additionally, throws big water drops 5 times to target and other enemies in target's range, dealing {1} P.DMG. Enemies hit by the big water drop are inflicted by Stun for {2} sec. Per each water drop thrown, {3} mana is consumed, and mana consumption rate is increased by {4}. Stops use when mana becomes 0.",
-            "light": "While in use, gain immunity to CC.",
-            "dark": "Per each water drop thrown, mana cost and mana consumption rate are increased by 100%, and per each water drop thrown, there is a 50% chance of throwing an extra water drop.",
-            "ut": [
-                "[Celestial Cataract] Upon each ATK there is a 7% chance of throwing a big water drop, dealing 100% of ATK as P.DMG and increasing own Crit DMG by 2% for 7 sec.",
-                "[Celestial Cataract] Upon each ATK there is a 7% chance of throwing a big water drop, dealing 100% of ATK as P.DMG and increasing own Crit DMG by 2.4% for 7 sec.",
-                "[Celestial Cataract] Upon each ATK there is a 7% chance of throwing a big water drop, dealing 100% of ATK as P.DMG and increasing own Crit DMG by 2.9% for 7 sec.",
-                "[Celestial Cataract] Upon each ATK there is a 7% chance of throwing a big water drop, dealing 100% of ATK as P.DMG and increasing own Crit DMG by 3.5% for 7 sec.",
-                "[Celestial Cataract] Upon each ATK there is a 7% chance of throwing a big water drop, dealing 100% of ATK as P.DMG and increasing own Crit DMG by 4.2% for 7 sec.",
-                "[Celestial Cataract] Upon each ATK there is a 7% chance of throwing a big water drop, dealing 100% of ATK as P.DMG and increasing own Crit DMG by 5% for 7 sec."
-            ]
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "ATK is increased by 15% per 1 orb of mana."
-        }
-    },
-    "58": {
-        "s2": {
-            "description": "Increases own ATK by {1} and Crit DMG by {2}% for {0} sec. Then moves a short distance forward, dealing {3} M.DMG to enemies in movement range and Charms them for {4} sec if the skill was used in the Arena. Can activate [Alluring Ambush] once within 5 sec after use.",
-            "light": "Gains 2 orbs of mana after movement. Gained Mana is consumed over 10 sec.",
-            "dark": "After using [Enchanting Flow], [Alluring Ambush] can be used twice within 10 sec.",
-            "ut": [
-                "[Enchanting Flow] After movement, absorbs DMG equal to 160% of ATK for 3 sec, then creates a shield that is immune to CC, and mana cost of [Alluring Ambush] is decreased by 1.",
-                "[Enchanting Flow] After movement, absorbs DMG equal to 190% of ATK for 3 sec, then creates a shield that is immune to CC, and mana cost of [Alluring Ambush] is decreased by 1.",
-                "[Enchanting Flow] After movement, absorbs DMG equal to 230% of ATK for 3 sec, then creates a shield that is immune to CC, and mana cost of [Alluring Ambush] is decreased by 1.",
-                "[Enchanting Flow] After movement, absorbs DMG equal to 270% of ATK for 3 sec, then creates a shield that is immune to CC, and mana cost of [Alluring Ambush] is decreased by 1.",
-                "[Enchanting Flow] After movement, absorbs DMG equal to 330% of ATK for 3 sec, then creates a shield that is immune to CC, and mana cost of [Alluring Ambush] is decreased by 1.",
-                "[Enchanting Flow] After movement, absorbs DMG equal to 400% of ATK for 3 sec, then creates a shield that is immune to CC, and mana cost of [Alluring Ambush] is decreased by 1."
-            ]
-        }
-    },
-    "64": {
-        "s2": {
-            "description": "Deals {0} M.DMG to frontal enemies in a straight line. This attack's Crit DMG is increased by 100%.",
-            "light": "Mana cost reduced by 1.",
-            "dark": "When Blessing of Light reaches 10 stacks, cooldown is reduced by 50%.",
-            "ut": [
-                "[Critical Intensity] Gains Immunity to CC and increases DMG by 20%.",
-                "[Critical Intensity] Gains Immunity to CC and increases DMG by 24%.",
-                "[Critical Intensity] Gains Immunity to CC and increases DMG by 29%.",
-                "[Critical Intensity] Gains Immunity to CC and increases DMG by 35%.",
-                "[Critical Intensity] Gains Immunity to CC and increases DMG by 42%.",
-                "[Critical Intensity] Gains Immunity to CC and increases DMG by 50%."
-            ]
-        }
-    },
-    "65": {
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Upon killing an enemy, all skill cooldown is reduced by 50%, and recovers 1 orb of mana."
-        }
-    },
-    "66": {
-        "s3": {
-            "description": "Deals a total of {0} M.DMG. to all enemies over 8 times, and increases ATK of all allies by {1} for 8 seconds. If used when Trance is stacked up to 3, this skill's DMG and ATK Boost increase by 100%, and all enemies' buffs are continuously canceled.",
-            "light": "Reduces skill cooldown for all allies by 10% when used.",
-            "dark": "All enemies take 15% more DMG for 8 seconds.",
-            "ut": [
-                "[Dance of Red Passion] Upon activation, enemies are inflicted with Silence for 2 sec, and all allies' Crit DMG is increased by 20% for the duration of skill.",
-                "[Dance of Red Passion] Upon activation, enemies are inflicted with Silence for 2 sec, and all allies' Crit DMG is increased by 24% for the duration of skill.",
-                "[Dance of Red Passion] Upon activation, enemies are inflicted with Silence for 2 sec, and all allies' Crit DMG is increased by 29% for the duration of skill.",
-                "[Dance of Red Passion] Upon activation, enemies are inflicted with Silence for 2 sec, and all allies' Crit DMG is increased by 35% for the duration of skill.",
-                "[Dance of Red Passion] Upon activation, enemies are inflicted with Silence for 2 sec, and all allies' Crit DMG is increased by 42% for the duration of skill.",
-                "[Dance of Red Passion] Upon activation, enemies are inflicted with Silence for 2 sec, and all allies' Crit DMG is increased by 50% for the duration of skill."
-            ]
-        }
-    },
-    "67": {
-        "s4": {
-            "description": "When in Anti-personnel Weapon mode, increases all DEF by {0} , and when in Siege Weapon mode, increases ATK by {1} , takes {2}% more DMG, and gains Immunity to CC. Recovers {3} MP each time DMG is dealt to an enemy.",
-            "light": "MP Recovery triples when there is only one enemy.",
-            "dark": "[Anti-personnel Weapon] - Decreases ATK by 20%, but increases MP Recovery/Sec by 100%. [Siege Weapon] - Decreases all DEF by 60%, but increases Crit DMG by 140%."
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "[Anti-personnel Weapon] - Increases CC ACC by 400. [Siege Weapon] - Increases ACC by 400."
-        }
-    },
-    "68": {
-        "uw": [
-            "Crit Chance is increased by 200 and Crit DMG is increased by 40%.",
-            "Crit Chance is increased by 240 and Crit DMG is increased by 48%.",
-            "Crit Chance is increased by 290 and Crit DMG is increased by 58%.",
-            "Crit Chance is increased by 350 and Crit DMG is increased by 70%.",
-            "Crit Chance is increased by 420 and Crit DMG is increased by 84%.",
-            "Crit Chance is increased by 500 and Crit DMG is increased by 100%."
-        ]
-    },
-    "73": {
-        "uw": [
-            "Increases own Crit DMG by 20%. Upon auto attack, deals P.DMG equal to 30% of ATK with [Flame of Monolith] and recovers HP equal to 20% of DMG dealt. When [Remove Limit] is active, the effect of [Flame of Monolith] is doubled.",
-            "Increases own Crit DMG by 24%. Upon auto attack, deals P.DMG equal to 36% of ATK with [Flame of Monolith] and recovers HP equal to 20% of DMG dealt. When [Remove Limit] is active, the effect of [Flame of Monolith] is doubled.",
-            "Increases own Crit DMG by 28%. Upon auto attack, deals P.DMG equal to 43% of ATK with [Flame of Monolith] and recovers HP equal to 20% of DMG dealt. When [Remove Limit] is active, the effect of [Flame of Monolith] is doubled.",
-            "Increases own Crit DMG by 34%. Upon auto attack, deals P.DMG equal to 52% of ATK with [Flame of Monolith] and recovers HP equal to 20% of DMG dealt. When [Remove Limit] is active, the effect of [Flame of Monolith] is doubled.",
-            "Increases own Crit DMG by 42%. Upon auto attack, deals P.DMG equal to 62% of ATK with [Flame of Monolith] and recovers HP equal to 20% of DMG dealt. When [Remove Limit] is active, the effect of [Flame of Monolith] is doubled.",
-            "Increases own Crit DMG by 50%. Upon auto attack, deals P.DMG equal to 75% of ATK with [Flame of Monolith] and recovers HP equal to 20% of DMG dealt. When [Remove Limit] is active, the effect of [Flame of Monolith] is doubled."
-        ],
-        "s2": {
-            "description": "Upon activation, [Remove Limit] takes effects. When activated, consumes {0}% of current HP to remove all negative effects on self and deals {1} P.DMG to nearby enemies in range. While [Remove Limit] is activated, consumes {2}% of current HP every 1 second, gains Immunity to CC, and increases Crit DMG by {3}% and ATK Spd by {4}. HP consumption and the increase in Crit DMG and ATK Spd grow larger as time passes. This effect cannot be dispelled, and is automatically deactivated when HP is under 25%.",
-            "light": "Enemies hit are stunned for 2 sec.",
-            "dark": "HP consumption per sec is increased by 100% and ATK Spd, Crit DMG boost is doubled.",
-            "ut": [
-                "[Remove Limit] For the skill's duration, deals P.DMG by 40% ATK every second to nearby enemies and increases Recovery by 30%.",
-                "[Remove Limit] For the skill's duration, deals P.DMG by 48% ATK every second to nearby enemies and increases Recovery by 30%.",
-                "[Remove Limit] For the skill's duration, deals P.DMG by 58% ATK every second to nearby enemies and increases Recovery by 30%.",
-                "[Remove Limit] For the skill's duration, deals P.DMG by 70% ATK every second to nearby enemies and increases Recovery by 30%.",
-                "[Remove Limit] For the skill's duration, deals P.DMG by 84% ATK every second to nearby enemies and increases Recovery by 30%.",
-                "[Remove Limit] For the skill's duration, deals P.DMG by 100% ATK every second to nearby enemies and increases Recovery by 30%."
-            ]
-        },
-        "s4": {
-            "description": "Not affected by Lifesteal stats. Instead, increases Max HP by {0} , Crit by {1} , CC ACC by {2} , and ACC by {3}. If receiving damage that leads to death, resurrects for {4} seconds, with increased Crit DMG by {5}%, and increased ATK Spd by {6}. The resurrection effect is only activated once per battle, and the resurrected Chase cannot use skills.",
-            "light": "Upon the activation of resurrection, increases ATK by 50%.",
-            "dark": "Upon the activation of resurrection, knocks back nearby enemies in range for 3 seconds."
-        },
-        "t5": {
-            "light": "ATK, DEF, HP+15% / Crit DMG +20%",
-            "dark": "Per every 1% of HP lost, Crit DMG is increased by 1% and ATK Spd is increased by 4."
-        }
-    },
-    "92": {
-        "s4": {
-            "description": "All Allies' ATK is increased by {0} , and upon using the skill 3 times, instantly gains The Top Financier's Knowledge. Per each stack of Top Financier's Knowledge, own Crit DMG is increased by 30%, and all skill effects are increased by 10% each. Top Financier's Knowledge can be stacked up to max 5 times, and cannot be dispelled.",
-            "light": "Recovers the caster's MP by 2 orbs when activated.",
-            "dark": "When activated, increases the caster's ATK by 50% for 10 sec."
-        }
+    "light": "Mana cost is reduced by 1.",
+    "dark": "Ignores DEF when there is only 1 enemy.",
+    "ut": {
+      "name": "Crown of Light",
+      "description": [
+        "[Judgement Blade] Reduces Cooldown by 30% and increases DMG by 4% upon every use. This effect can be stacked up to max 10 times.",
+        "[Judgement Blade] Reduces Cooldown by 30% and increases DMG by 4.8% upon every use. This effect can be stacked up to max 10 times.",
+        "[Judgement Blade] Reduces Cooldown by 30% and increases DMG by 5.8% upon every use. This effect can be stacked up to max 10 times.",
+        "[Judgement Blade] Reduces Cooldown by 30% and increases DMG by 7% upon every use. This effect can be stacked up to max 10 times.",
+        "[Judgement Blade] Reduces Cooldown by 30% and increases DMG by 8.4% upon every use. This effect can be stacked up to max 10 times.",
+        "[Judgement Blade] Reduces Cooldown by 30% and increases DMG by 10% upon every use. This effect can be stacked up to max 10 times."
+      ],
+      "story": "The crown of Kyle, the king of Orvelia and the Hero of Holy Sword. Worn by King Kyle during his expedition to kill Dark Lord Angmund 100 years ago, this golden grown contains the will of the Goddess of Light. After Angmund was defeated, the Crown of Light, along with the Holy Sword, Aea, was left in the place where the king disappeared."
     }
-}
-
-var names = {
-  "Kasel": "1",
-  "Frey": "2",
-  "Cleo": "3",
-  "Roi": "4",
-  "Gau": "5",
-  "Phillop": "6",
-  "Lakrak": "7",
-  "Kaulah": "8",
-  "Epis": "9",
-  "Selene": "10",
-  "Maria": "11",
-  "Miruru": "12",
-  "Lorraine": "13",
-  "Clause": "15",
-  "Rephy": "16",
-  "Dimael": "17",
-  "Reina": "18",
-  "Pavel": "19",
-  "Demia": "20",
-  "Naila": "21",
-  "Rodina": "22",
-  "Morrah": "23",
-  "Baudouin": "24",
-  "Jane": "25",
-  "Aisha": "26",
-  "Leo": "27",
-  "Fluss": "28",
-  "Luna": "29",
-  "Laias": "30",
-  "Arch": "31",
-  "Lewisia": "32",
-  "Nyx": "33",
-  "Annette": "34",
-  "Mitra": "35",
-  "Ricardo": "36",
-  "Tanya": "37",
-  "Ezekiel": "38",
-  "Cassandra": "39",
-  "Theo": "40",
-  "Mediana": "41",
-  "Oddy": "42",
-  "Viska": "43",
-  "Priscilla": "44",
-  "Yanne": "45",
-  "Zafir": "46",
-  "Ophelia": "49",
-  "Requina": "50",
-  "Aselica": "51",
-  "Crow": "52",
-  "Shamilla": "53",
-  "Seria": "55",
-  "Erze": "56",
-  "Lilia": "57",
-  "Laudia": "58",
-  "Lucias": "59",
-  "Chrisha": "60",
-  "Neraxis": "61",
-  "Scarlet": "62",
-  "Sonia": "63",
-  "Artemia": "64",
-  "Mirianne": "65",
-  "Shea": "66",
-  "Kara": "67",
-  "Nia": "68",
-  "Chase": "73",
-  "May": "90",
-  "Gladi": "91",
-  "Veronica": "92",
-  "Loman": "93",
-  "Juno": "94",
-  "Nicky": "95"
+  },
+  "s2": {
+    "name": "Valiant Dash",
+    "description": "Attacks the target 3 times, and then charges behind them to deal {0} P.DMG.",
+    "books": {
+      "0": "DMG is increased by {0}%.",
+      "1": "DMG is increased by {0}%.",
+      "2": "Crit Chance is increased by {0}."
+    },
+    "light": "Mana cost is reduced by 1.",
+    "dark": "Target takes 25% increased P.DMG for 10 sec.",
+    "ut": {
+      "name": "Emperor's Gauntlet",
+      "description": [
+        "[Valiant Dash] Increases DMG by 20% and reduces Cooldown by 10% upon a Crit Hit.",
+        "[Valiant Dash] Increases DMG by 24% and reduces Cooldown by 10% upon a Crit Hit.",
+        "[Valiant Dash] Increases DMG by 29% and reduces Cooldown by 10% upon a Crit Hit.",
+        "[Valiant Dash] Increases DMG by 35% and reduces Cooldown by 10% upon a Crit Hit.",
+        "[Valiant Dash] Increases DMG by 42% and reduces Cooldown by 10% upon a Crit Hit.",
+        "[Valiant Dash] Increases DMG by 50% and reduces Cooldown by 10% upon a Crit Hit."
+      ],
+      "story": "Gauntlet imbued with the blessing of Lua, the Goddess of Light. Gauntlet passed down to the kings of the Orbis Continent. Contains the encouragement of the goddess that allows you to use Valiant Dash towards enemies without any fear."
+    }
+  },
+  "s3": {
+    "name": "Proxy of God",
+    "description": "Deals {0} P.DMG to nearby enemies and inflicts Stun for 3 sec. Additionally, for {1} sec, ATK is increased by {2} and Dodge Rate is increased by {3} , while gaining immunity to CC. This status cannot be dispelled.",
+    "books": {
+      "0": "ATK boost is increased by {0}%.",
+      "1": "ATK boost is increased by {0}%.",
+      "2": "Increases Spd by {0} for the duration of skill."
+    },
+    "light": "Mana cost is reduced by 1.",
+    "dark": "ATK boost is increased by 40%.",
+    "ut": {
+      "name": "Proxy's Insignia",
+      "description": [
+        "[Proxy of God] Additionally, Dodge Rate is increased by 250, and ATK Spd is increased by 100 for the duration of skill.",
+        "[Proxy of God] Additionally, Dodge Rate is increased by 250, and ATK Spd is increased by 120 for the duration of skill.",
+        "[Proxy of God] Additionally, Dodge Rate is increased by 250, and ATK Spd is increased by 140 for the duration of skill.",
+        "[Proxy of God] Additionally, Dodge Rate is increased by 250, and ATK Spd is increased by 170 for the duration of skill.",
+        "[Proxy of God] Additionally, Dodge Rate is increased by 250, and ATK Spd is increased by 210 for the duration of skill.",
+        "[Proxy of God] Additionally, Dodge Rate is increased by 250, and ATK Spd is increased by 250 for the duration of skill."
+      ],
+      "story": "A rune that proves that one is an agent of Lua, the Goddess of Light. The Rune of Proxy is an artifact of the Church of Lua, and it's given to the knight who wields the Aea, the Sword of Light. The Rune of Proxy pushes enemies with the power of light and increases ATK and morale."
+    }
+  },
+  "s4": {
+    "name": "Goddess Strike",
+    "description": "Upon dodging, deals {0} P.DMG to frontal enemies in range, and reduces their ACC by {1} for 5 sec. After hitting the target, recovers 300 mana.",
+    "books": {
+      "0": "DMG is increased by {0}%.",
+      "1": "DMG is increased by {0}%.",
+      "2": "Crit Chance is increased by {0}."
+    },
+    "light": "ACC reduction rate is changed to 250.",
+    "dark": "Casting is boosted and Cooldown is reduced by 1 sec."
+  },
+  "t5": {
+    "light": "ATK, DEF, HP+15% / P.Dodge +100",
+    "dark": "Upon attacking, attack 1 extra time dealing 40% of ATK as DMG."
+  }
 }
 
 var app = new Vue({
     el: '#app',
     data: {
-        hero: atklist
-    },
-    computed: {
-      print: function(){
-        var x = ''
-        for(propertyName in this.hero){
-          for(key in names){
-            if(names[key] == propertyName){
-              name = key
-              break
-            } else{
-              name = 'undefined'
-            }
-          }
-          x = x + '<br>Hero: ' + name
-          if(typeof this.hero[propertyName] === 'object' && this.hero[propertyName] !== null){
-            x = x + '<br>'
-            for(propertyName2 in this.hero[propertyName]){
-              if(typeof this.hero[propertyName][propertyName2] === 'object' && this.hero[propertyName][propertyName2] !== null){
-                x = x + propertyName2 + '<br>'
-                for(propertyName3 in this.hero[propertyName][propertyName2]){
-                  x = x + propertyName3 + ': ' + this.hero[propertyName][propertyName2][propertyName3] + '<br>'
-                }
-              } else{
-                x = x + propertyName2 + ': ' + this.hero[propertyName][propertyName2] + '<br>'
-              }
-            }
-          } else{
-              x = x + ': ' + this.hero[propertyName] + '<br>'
-          }
-        }
-        return x
-      },
-      print2: function(){
-        var x = ''
-        for(propertyName in cdmglist){
-          for(key in names){
-            if(names[key] == propertyName){
-              name = key
-              break
-            } else{
-              name = 'undefined'
-            }
-          }
-          x = x + '<br>Hero: ' + name
-          if(typeof cdmglist[propertyName] === 'object' && cdmglist[propertyName] !== null){
-            x = x + '<br>'
-            for(propertyName2 in cdmglist[propertyName]){
-              if(typeof cdmglist[propertyName][propertyName2] === 'object' && cdmglist[propertyName][propertyName2] !== null){
-                x = x + propertyName2 + '<br>'
-                for(propertyName3 in cdmglist[propertyName][propertyName2]){
-                  x = x + propertyName3 + ': ' + cdmglist[propertyName][propertyName2][propertyName3] + '<br>'
-                }
-              } else{
-                x = x + propertyName2 + ': ' + cdmglist[propertyName][propertyName2] + '<br>'
-              }
-            }
-          } else{
-              x = x + ': ' + cdmglist[propertyName] + '<br>'
-          }
-        }
-        return x
-      }
+        hero: hero
     }
 })
 </script>
