@@ -302,7 +302,7 @@
                             Number of atk lines: <code>{{n}}</code> <br>
                             Number of crit damage lines: <code>{{m}}</code> <br>
                             Total Atk boost from gears and runes: <code>{{ Math.round(n*b*100 + Number(R1)) }}%</code> <br>
-                            Total Crit Damage (include default 200% crit damage multiplier): <code>{{ Math.round(Number(BCd) + m*a*100) }}%</code> <br>
+                            Total Crit Damage (include default 200% crit damage multiplier): <code>{{ Math.round(BCd + m*a*100) }}%</code> <br>
                             Atk value seen in stat page: <code>{{ Math.round(OA*(n*b*100 + Number(R1) + Number(100))/100) }}</code> <br>
                             Cdmg value seen in stat page: <code>{{ Math.round(Number(BCd) - Cd - 200 + m*a*100)}}%</code> <br>
                             Final damage value: <code>{{f}}</code> <br>
